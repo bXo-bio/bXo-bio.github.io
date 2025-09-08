@@ -3,124 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biology Tutoring | Year 11 & 12</title>
+  <meta name="description" content="Expert biology tutoring for Year 11 and 12. Build strong foundations, excel in exams, and prepare for university with tailored support.">
+  <meta name="keywords" content="Biology tutoring, Year 11, Year 12, HSC Biology, online tutoring, exam preparation">
+  <meta name="author" content="bXo Tutoring">
+
+  <title>Biology Tutoring Services | bXo</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
 <body>
   <!-- Navbar -->
-  <header>
-    <div class="navbar">
-      <div class="logo"><span>bxo</span> bxo</div>
-      <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="modules.html">Modules</a>
-        <a href="resources.html">Resources</a>
-        <a href="tutors.html">Tutor</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <a href="enroll.html" class="btn enroll">Enroll</a>
-        <a href="login.html" class="btn-outline">Log In</a>
-      </div>
+<header>
+  <div class="navbar">
+    <div class="nav-left">
+      <a href="home.html" class="logo">
+        <img src="images/logo.png" alt="Logo" />
+        <span class="company-name">bXo Tutoring</span>
+      </a>
     </div>
-  </header>
+
+    <nav class="nav-center">
+      <a href="home.html" class="active">Home</a>
+      <div class="dropdown">
+        <a href="about.html" class="dropbtn">About ▾</a>
+        <div class="dropdown-content">
+          <a href="tutors.html">Tutor Information</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="resources.html" class="dropbtn">Resources ▾</a>
+        <div class="dropdown-content">
+          <a href="modules.html">Module 5 - Heredity</a>
+          <a href="modules.html">Module 6 - Genetic Change</a>
+          <a href="modules.html">Module 7 - Infectious Disease</a>
+          <a href="modules.html">Module 8 - Non-infectious Disease and Disorders</a>
+        </div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- optional: right-side icons/buttons -->
+    </div>
+  </div>
+</header>
+
+
 
   <!-- Hero -->
   <section class="hero">
-    <h2>Master Biology with Confidence</h2>
-    <p>Expert tutoring designed for Year 11 and 12 students. Build strong foundations, excel in exams.</p>
-    <a href="contact.html" class="btn">Book a Free Trial</a>
+    <h2>bXo Tutoring</h2>
+    <p>Online tutoring for Year 11 and 12 students. Develop strong fundamentals and excel in exams.</p>
+    <!-- <p class="tagline">Trusted by students across Australia.</p> -->
+    <a href="contact.html" class="btn">Enrol Now</a>
   </section>
 
-  <!-- Modules (preview section) -->
-  <section id="modules" class="section">
-    <h3>What We Cover</h3>
-    <div class="cards">
-      <div class="card"><h4>Cell Biology</h4><p>Understand the building blocks of life, organelles, and cellular processes.</p></div>
-      <div class="card"><h4>Genetics & DNA</h4><p>Explore inheritance, DNA structure, gene expression, and biotechnology.</p></div>
-      <div class="card"><h4>Human Anatomy</h4><p>Dive into body systems, functions, and how they interact to maintain life.</p></div>
-      <div class="card"><h4>Ecology & Evolution</h4><p>Learn how species adapt, ecosystems function, and life evolves over time.</p></div>
+  <!-- Subjects (preview section) -->
+<section id="modules" class="section">
+  <h3 class="section-title">What We Cover</h3>
+  <div class="cards module-cards">
+    <div class="card module-card">
+      <img src="images/module1.jpg" alt="Module 1 - Heredity" class="card-img">
+      <h4>Module 5 - Heredity</h4>
+      <ul>
+        <li>Reproduction</li>
+        <li>Cell Replication</li>
+        <li>DNA and Polypeptide Synthesis</li>
+        <li>Genetic Variation</li>
+        <li>Inheritance Patterns in a Population</li>
+      </ul>
+      <a href="subjects.html#module1" class="btn card-btn">Learn More</a>
     </div>
-    <p><a href="modules.html" class="btn">Learn More</a></p>
-  </section>
 
-  <!-- Tutors (preview section) -->
-  <section id="tutors" class="section">
-    <h3>Meet Your Tutors</h3>
-    <div class="cards">
-      <div class="tutor-card">
-        <div class="tutor-photo">Photo</div>
-        <div class="tutor-info">
-          <h4>Dr. Sarah Mitchell</h4>
-          <p>PhD in Molecular Biology with 10+ years of teaching experience.</p>
-        </div>
-      </div>
-      <div class="tutor-card">
-        <div class="tutor-photo">Photo</div>
-        <div class="tutor-info">
-          <h4>James Patel</h4>
-          <p>Qualified Biology teacher specializing in exam preparation for senior students.</p>
-        </div>
-      </div>
+    <div class="card module-card">
+      <img src="images/module2.jpg" alt="Module 2 - Genetic Change" class="card-img">
+      <h4>Module 6 - Genetic Change</h4>
+      <ul>
+        <li>Mutation</li>
+        <li>Biotechnology</li>
+        <li>Genetic Technologies</li>
+      </ul>
+      <a href="subjects.html#module2" class="btn card-btn">Learn More</a>
     </div>
-    <p><a href="tutors.html" class="btn">See Full Profiles</a></p>
-  </section>
 
-  <!-- Contact (preview section) -->
-  <section id="contact" class="section">
-    <h3>Get in Touch</h3>
-    <p>Have questions or want to book a session? Reach out today!</p>
-    <a href="mailto:tutoring@biology.com" class="btn">Email Us</a>
-    <p><a href="contact.html" class="btn-outline">More Contact Options</a></p>
-  </section>
+    <div class="card module-card">
+      <img src="images/module3.jpg" alt="Module 3 - Infectious Disease" class="card-img">
+      <h4>Module 7 - Infectious Disease</h4>
+      <ul>
+        <li>Causes of Infectious Disease</li>
+        <li>Responses to Pathogens</li>
+        <li>Immunity</li>
+        <li>Prevention, Treatment and Control</li>
+      </ul>
+      <a href="subjects.html#module3" class="btn card-btn">Learn More</a>
+    </div>
 
-  <!-- Footer -->
-<!-- Footer Navigation Panel -->
-<section class="footer-nav">
-  <div class="footer-brand">
-    <h4>MyCompany</h4>
-    <p>
-      We provide top-quality courses and resources to help you learn and grow. 
-      Join our community and take your skills to the next level!
-    </p>
-  </div>
-
-  <div class="footer-links">
-    <h5>Courses</h5>
-    <ul>
-      <li><a href="#">Web Development</a></li>
-      <li><a href="#">Data Science</a></li>
-      <li><a href="#">Design</a></li>
-      <li><a href="#">Marketing</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Resources</h5>
-    <ul>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Guides</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">FAQs</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Company</h5>
-    <ul>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Careers</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-    </ul>
+    <div class="card module-card">
+      <img src="images/module4.jpg" alt="Module 4 - Non-infectious Diseases" class="card-img">
+      <h4>Module 8 - Non-infectious Disease and Disorders</h4>
+      <ul>
+        <li>Homeostasis</li>
+        <li>Causes and Effects</li>
+        <li>Epidemiology</li>
+        <li>Prevention</li>
+        <li>Technologies and Disorders</li>
+      </ul>
+      <a href="subjects.html#module4" class="btn card-btn">Learn More</a>
+    </div>
   </div>
 </section>
 
-<!-- Bottom Bar -->
-<div class="footer-bottom">
-  © 2025 MyCompany. All rights reserved.
-</div>
 
+
+<!-- Tutors + Contact Side by Side -->
+<section class="two-column">
+  <!-- Tutors (preview section) -->
+  <div id="tutors" class="section tutors-section">
+    <h3>Meet The Tutor</h3>
+    <p>Our tutor combines academic expertise with a passion for helping students achieve their goals.</p>
+    <div class="cards">
+      <div class="tutor-card">
+        <div class="tutor-photo">  <img src="images/biology-bg.jpg" alt="Tutor Name"> </div>
+        <div class="tutor-info">
+          <h4>Tony Nguyen</h4>
+          <p>PhD in Molecular Biology with 10+ years of teaching experience.</p>
+        </div>
+      </div>
+    </div>
+    <p><a href="tutors.html" class="btn">See Full Profile</a></p>
+  </div>
+
+  <!-- Contact (preview section) -->
+  <div id="contact" class="section">
+    <div class="contact-card">
+      <h3>Get in Touch</h3>
+      <p>Have questions or want to book a session? We’d love to hear from you.</p>
+      <a href="mailto:tutoring@bXo.com" class="btn">Email Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section faq-section">
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-container">
+    <div class="faq">
+      <button class="faq-question">How are tutoring sessions run? <span class="icon">+</span></button>
+      <div class="faq-answer">
+        <p>Sessions are conducted <b>online</b> only. We use interactive tools, practice problems, and guided discussions.</p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="faq-question">Do you offer trial lessons?<span class="icon">+</span></button>
+      <div class="faq-answer">
+        <p>Yes! We offer a free consultation for a 30-minute lesson to discuss your goals so you can experience a lesson first-hand.</p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="faq-question">What if I only need exam preparation?<span class="icon">+</span></button>
+      <div class="faq-answer">
+        <p>No problem. We can focus on exam strategies, practice questions, and targeted revision for high results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer Navigation Panel -->
+  <section class="footer-nav">
+    <div class="footer-brand">
+      <h4>bXo Tutoring</h4>
+      <p>
+        We provide top-quality tutoring and resources to help you learn and grow. 
+        Join our community and take your skills to the next level!
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <h5>Modules</h5>
+      <ul>
+        <li><a href="Module5.html">Module 5</a></li>
+        <li><a href="Module6.html">Module 6</a></li>
+        <li><a href="Module7.html">Module 7</a></li>
+        <li><a href="Module8.html">Module 8</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="faqs.html">FAQs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="tutors.html">Tutor</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    © 2025 bXo Tutoring. All rights reserved.
+  </div>
 </body>
 </html>
