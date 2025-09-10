@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Lesson | bXo Biology Tutoring</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="lesson-page">
+    <header>
+      <div class="navbar">
+        <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/logo.png" alt="Logo" />
+            <span class="company-name">bXo Tutoring</span>
+          </a>
+        </div>
+        <nav class="nav-center">
+          <a href="home.html">Home</a>
+          <div class="dropdown">
+            <a class="dropbtn">About ▾</a>
+            <div class="dropdown-content">
+              <a href="about.html">Company Info</a>
+              <a href="tutors.html">Tutor Info</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn">Resources ▾</a>
+            <div class="dropdown-content">
+              <a href="module5.html">Module 5 - Heredity</a>
+              <a href="module6.html">Module 6 - Genetic Change</a>
+              <a href="module7.html">Module 7 - Infectious Disease</a>
+              <a href="module8.html">Module 8 - Non-infectious Disease and Disorders</a>
+              <a href="notes.html">Study Notes</a>
+              <a href="exams.html">Exams</a>
+            </div>
+          </div>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-right">
+          <!-- optional: right-side icons/buttons -->
+        </div>
+      </div>
+    </header>
+    <!-- Leave confirmation modal -->
+    <div id="leave-modal" class="modal">
+      <div class="modal-content">
+        <p>Are you sure you want to leave? <br>Any changes will be lost. </p>
+        <div class="modal-buttons">
+          <button id="leave-yes" class="btn">Yes</button>
+          <button id="leave-no" class="btn">No</button>
+        </div>
+      </div>
+    </div>
+    <!-- Booking Form -->
+    <section class="contact-page">
+    <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
+          <h2 id="lesson-title" class="lesson-title"></h2>
+      <div class="form-group">
+        <label for="lesson-type">Lesson Type</label>
+        <input type="text" id="lesson-type" name="lesson-type" readonly>
+      </div>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Optional: 123-456-7890">
+      </div>
+      <h3>Preferred Lesson Slots</h3>
+      <p>Pick a day and time range. Click "+" to add more slots.</p>
+      <div id="slots-container">
+        <div class="slot">
+          <label>Slot 1</label>
+          <input type="date" name="date1" required>
+          <input type="time" name="start1" required> to <input type="time" name="end1" required>
+        </div>
+      </div>
+      <button type="button" id="add-slot" class="btn">+ Add another slot</button>
+      <div class="form-group">
+        <label for="message">Additional Notes</label>
+        <textarea id="message" name="message" rows="4" placeholder="Anything else you'd like to share?"></textarea>
+      </div>
+      <div class="form-group terms-container">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the terms and privacy policy.</label>
+      </div>
+      <button type="submit" id="submit-btn">Submit Request</button>
+    </form>
+  </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get("type");
+        const lessonTypeInput = document.getElementById("lesson-type");
+        const lessonTitle = document.getElementById("lesson-title"); // 👈 grab the h2
+        if (type === "solo") {
+          lessonTypeInput.value = "One-on-One Tutoring";
+          lessonTitle.textContent = "Book a One-on-One Tutoring Session"; 
+        } else if (type === "group") {
+          lessonTypeInput.value = "Group Tutoring";
+          lessonTitle.textContent = "Book a Group Tutoring Session"; 
+        }
+        const slotsContainer = document.getElementById("slots-container");
+        const addSlotButton = document.getElementById("add-slot");
+
+        function updateSlotNumbers() {
+          const slots = slotsContainer.querySelectorAll(".slot");
+          slots.forEach((slot, index) => {
+            slot.querySelector("label").textContent = `Slot ${index + 1}`;
+          });
+        }
+
+        function createSlot() {
+          const slotDiv = document.createElement("div");
+          slotDiv.classList.add("slot");
+          slotDiv.innerHTML = `
+      
+															<label></label>
+															<input type="date" required>
+																<input type="time" required> to 
+      
+																	<input type="time" required>
+																		<button type="button" class="remove-slot">Remove</button>
+    `;
+          slotDiv.querySelector(".remove-slot").addEventListener("click", () => {
+            removeSlotAnimated(slotDiv);
+          });
+          slotsContainer.appendChild(slotDiv);
+          updateSlotNumbers();
+        }
+
+        function removeSlotAnimated(slotDiv) {
+          slotDiv.style.opacity = '0';
+          slotDiv.style.transform = 'translateY(-20px)';
+          slotDiv.addEventListener('transitionend', () => {
+            slotDiv.remove();
+            updateSlotNumbers();
+          });
+        }
+        updateSlotNumbers();
+        addSlotButton.addEventListener("click", createSlot);
+      });
+      // Track form changes and warn before leaving
+      let formChanged = false;
+      const form = document.querySelector(".contact-form");
+      form.addEventListener("input", () => formChanged = true);
+      window.addEventListener("beforeunload", function(e) {
+        if (formChanged) {
+          e.preventDefault();
+          e.returnValue = "";
+        }
+      });
+      const links = document.querySelectorAll("a");
+      const leaveModal = document.getElementById("leave-modal");
+      const leaveYes = document.getElementById("leave-yes");
+      const leaveNo = document.getElementById("leave-no");
+      links.forEach(link => {
+        link.addEventListener("click", function(e) {
+          if (formChanged) {
+            e.preventDefault();
+            leaveModal.style.display = "flex";
+            leaveYes.onclick = () => {
+              formChanged = false;
+              window.location.href = link.href;
+            };
+            leaveNo.onclick = () => {
+              leaveModal.style.display = "none";
+            };
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
