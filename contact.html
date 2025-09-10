@@ -1,232 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | bXo Biology Tutoring</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Modern Contact Page Custom Layout */
-    .contact-hero {
-      text-align: center;
-      padding: 4rem 2rem 4rem;
-      background: linear-gradient(rgba(186, 242, 233, 0.9), rgba(186, 242, 233, 0.9)),
-                  url("images/biology-bg.jpg") center/cover no-repeat;
-      color: var(--color-dark);
-      border-bottom: 2px solid var(--color-light);
-    }
-
-    .contact-hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .contact-hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 900px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
-    }
-
-    .contact-card {
-      background: var(--color-white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: transform var(--transition), box-shadow var(--transition);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .contact-card h3 {
-      font-size: 1.6rem;
-      color: var(--color-mid);
-      margin-bottom: 1rem;
-    }
-
-    .contact-card p {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .contact-card a.btn {
-      margin-top: auto;
-      align-self: center;
-      text-decoration: none;
-      color: var(--color-white);
-    }
-
-    /* Contact Form Styling */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-group {
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-      color: var(--color-dark);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: var(--radius-md);
-      font-size: 1rem;
-      font-family: inherit;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--color-light);
-      box-shadow: 0 0 0 3px rgba(116, 198, 157, 0.25);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-    }
-  </style>
-</head>
-<body>
-<header>
-  <div class="navbar">
-    <div class="nav-left">
-      <a href="home.html" class="logo">
-        <img src="images/logo.png" alt="Logo" />
-        <span class="company-name">bXo Tutoring</span>
-      </a>
-    </div>
-
-    <nav class="nav-center">
-      <a href="home.html">Home</a>
-      <div class="dropdown">
-        <a href="about.html" class="dropbtn">About ▾</a>
-        <div class="dropdown-content">
-          <a href="tutors.html">Tutor Information</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | bXo Biology Tutoring</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/logo.png" alt="Logo" />
+            <span class="company-name">bXo Tutoring</span>
+          </a>
+        </div>
+        <nav class="nav-center">
+          <a href="home.html">Home</a>
+          <div class="dropdown">
+            <a class="dropbtn">About ▾</a>
+            <div class="dropdown-content">
+              <a href="about.html">Company Info</a>
+              <a href="tutors.html">Tutor Info</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn">Resources ▾</a>
+            <div class="dropdown-content">
+              <a href="module5.html">Module 5 - Heredity</a>
+              <a href="module6.html">Module 6 - Genetic Change</a>
+              <a href="module7.html">Module 7 - Infectious Disease</a>
+              <a href="module8.html">Module 8 - Non-infectious Disease and Disorders</a>
+              <a href="notes.html">Study Notes</a>
+              <a href="exams.html">Practice Exams</a>
+            </div>
+          </div>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <div class="nav-right">
+          <!-- optional: right-side icons/buttons -->
         </div>
       </div>
-      <div class="dropdown">
-        <a href="resources.html" class="dropbtn">Resources ▾</a>
-        <div class="dropdown-content">
-          <a href="modules.html">Module 5 - Heredity</a>
-          <a href="modules.html">Module 6 - Genetic Change</a>
-          <a href="modules.html">Module 7 - Infectious Disease</a>
-          <a href="modules.html">Module 8 - Non-infectious Disease and Disorders</a>
+    </header>
+    <!-- Hero -->
+    <section class="small-hero">
+      <h2>Get in Touch with Us</h2>
+      <p>Have questions or want to schedule your first tutoring session? Fill out the form or reach out directly.</p>
+    </section>
+    <!-- Leave confirmation modal -->
+    <div id="leave-modal" class="modal">
+      <div class="modal-content">
+        <p>Are you sure you want to leave? <br>Any changes will be lost. </p>
+        <div class="modal-buttons">
+          <button id="leave-yes" class="btn">Yes</button>
+          <button id="leave-no" class="btn">No</button>
         </div>
       </div>
-      <a href="pricing.html">Pricing</a>
-      <a href="contact.html" class="active">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<!-- Hero -->
-<section class="contact-hero">
-  <h2>Get in Touch with Us</h2>
-  <p>Have questions or want to schedule your first tutoring session? Fill out the form or reach out directly.</p>
-</section>
-
-<!-- Contact Grid -->
-<section>
-  <div class="contact-grid" style="grid-template-columns: 3fr 1fr; align-items: start;">
-    <!-- Contact Form Card (larger) -->
-    <div class="contact-card">
-      <h3>Send a Message</h3>
-      <form action="#" method="post" class="contact-form">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your full name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com" required>
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="10" placeholder="How can we help you?" required></textarea>
-        </div>
-
-        <button type="submit" class="btn">Send Message</button>
-      </form>
     </div>
-
-    <!-- Contact Info Card (shorter) -->
-    <div class="contact-card" style="height: auto; align-self: start;">
-      <h3>Contact Information</h3>
-      <p><strong>Email</strong><br><a href="mailto:tutoring@edupath.com">tutoring@edupath.com</a></p>
-      <p><strong>Phone</strong><br><a href="tel:+61123456789">+61 123 456 789</a></p>
-      <p><strong>Location</strong><br>Sydney, Australia</p>
-      <a href="contact.html" class="btn">Book a Session</a>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- Footer -->
-<section class="footer-nav">
-  <div class="footer-brand">
-    <h4>bXo Tutoring</h4>
-    <p>We provide top-quality tutoring and resources to help you learn and grow. 
-       Join our community and take your skills to the next level!</p>
-  </div>
-
-  <div class="footer-links">
-    <h5>Modules</h5>
-    <ul>
-      <li><a href="Module5.html">Module 5</a></li>
-      <li><a href="Module6.html">Module 6</a></li>
-      <li><a href="Module7.html">Module 7</a></li>
-      <li><a href="Module8.html">Module 8</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Resources</h5>
-    <ul>
-      <li><a href="faqs.html">FAQs</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Company</h5>
-    <ul>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="tutors.html">Tutor</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </div>
-</section>
-
-<div class="footer-bottom">
-  © 2025 bXo Tutoring. All rights reserved.
+    <!-- Contact Grid -->
+    <section class="contact-page">
+      <div class="contact-grid" style="grid-template-columns: 3fr 1fr; align-items: start;">
+        <!-- Contact Form Card (larger) -->
+        <div class="contact-card">
+          <h3>Send a Message</h3>
+          <form id="contact-form" action="" method="POST">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required maxlength="50">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="10" placeholder="How can we help you?" required maxlength="500"></textarea>
+            </div>
+            <button type="submit" id="submit-btn" class="btn"> Send Message <span id="loader" class="loader" style="display:none;"></span>
+            </button>
+          </form>
+          <!-- Confirmation popup -->
+          <div id="confirmation-popup" class="modal">
+            <div class="modal-content">
+              <p>Thank you! Your message has been sent. We’ll get back to you soon.</p>
+              <button id="close-popup" class="btn">Close</button>
+            </div>
+          </div>
+        </div>
+        <!-- Contact Info Card (shorter) -->
+        <div class="contact-card" style="height: auto; align-self: start;">
+          <h3>Contact Information</h3>
+          <p>
+            <strong>Email</strong>
+            <br>
+            <a href="mailto:tutoring@edupath.com">tutoring@edupath.com</a>
+          </p>
+          <p>
+            <strong>Phone</strong>
+            <br>
+            <a href="tel:+61123456789">+61 123 456 789</a>
+          </p>
+          <p>
+            <strong>Location</strong>
+            <br>Sydney, Australia
+          </p>
+          <a href="pricing.html" class="btn">Book a Session</a>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <section class="footer-nav">
+      <div class="footer-brand"><h4>bXo Tutoring</h4><p> We provide top-quality tutoring and resources to help you learn and grow. Join our community and take your skills to the next level! </p></div>
+      <div class="footer-links"><h5>Modules</h5><ul><li><a href="Module5.html">Module 5</a></li><li><a href="Module6.html">Module 6</a></li><li><a href="Module7.html">Module 7</a></li><li><a href="Module8.html">Module 8</a></li></ul></div>
+      <div class="footer-links"><h5>Resources</h5><ul><li><a href="home.html#faq">FAQs</a></li><li><a href="notes.html">Study Notes</a></li><li><a href="exams.html">Practice Exams</a></li></ul></div>
+      <div class="footer-links"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="tutors.html">Tutor</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </section>
+    <div class="footer-bottom">
+  © 2025 bXo Tutoring. All rights reserved. ∙ 
+  <a href="privacy.html">Privacy Policy</a> ∙ 
+  <a href="terms.html">Terms and Conditions</a>
 </div>
-</body>
+<script>
+  // --- form change detection (fixed selector) ---
+  let formChanged = false;
+  const form = document.getElementById("contact-form");
+  form.addEventListener("input", () => formChanged = true);
+
+  // beforeunload prompt
+  window.addEventListener("beforeunload", function(e) {
+    if (formChanged) {
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+  });
+
+  // custom modal for navigation links (same as yours, but safer)
+  const links = document.querySelectorAll("a:not([data-ignore-leave])");
+  const leaveModal = document.getElementById("leave-modal");
+  const leaveYes = document.getElementById("leave-yes");
+  const leaveNo = document.getElementById("leave-no");
+  links.forEach(link => {
+    link.addEventListener("click", function(e) {
+      if (formChanged) {
+        e.preventDefault();
+        leaveModal.style.display = "flex";
+        leaveYes.onclick = () => {
+          formChanged = false;
+          window.location.href = link.href;
+        };
+        leaveNo.onclick = () => leaveModal.style.display = "none";
+      }
+    });
+  });
+
+  // --- submit handler (uses fetch) ---
+  const submitBtn = document.getElementById("submit-btn");
+  const loader = document.getElementById("loader");
+  const confirmation = document.getElementById("confirmation-popup");
+  const closePopup = document.getElementById("close-popup");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // simple client-side validation (optional, server must validate too)
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    if (!name || !email || !message) {
+      alert("Please complete all fields.");
+      return;
+    }
+
+    // show loader (you can style .loader)
+    loader.style.display = "inline-block";
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch("/api/contact", { // change depending on backend
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (!res.ok) throw new Error("Network response was not OK");
+
+      // success
+      loader.style.display = "none";
+      submitBtn.disabled = false;
+      formChanged = false;
+      form.reset();
+      confirmation.style.display = "flex";
+    } catch (err) {
+      loader.style.display = "none";
+      submitBtn.disabled = false;
+      console.error(err);
+      alert("Sorry — could not send message. Try again later.");
+    }
+  });
+
+  // close confirmation
+  closePopup.addEventListener("click", () => {
+    document.getElementById("confirmation-popup").style.display = "none";
+  });
+</script>
+
+  </body>
 </html>
