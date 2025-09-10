@@ -1,258 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing | bXo Biology Tutoring</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  <style>
-    /* Pricing Page Custom Layout */
-    .pricing-hero {
-      text-align: center;
-      padding: 4rem 2rem 4rem;
-      background: linear-gradient(rgba(186, 242, 233, 0.9), rgba(186, 242, 233, 0.9)),
-                  url("images/biology-bg.jpg") center/cover no-repeat;
-      color: var(--color-dark);
-            border-bottom: 2px solid var(--color-light);
-    }
-
-    .pricing-hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
-    }
-
-    .pricing-card {
-      background: var(--color-white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: transform var(--transition), box-shadow var(--transition);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .pricing-card h4 {
-      font-size: 1.6rem;
-      color: var(--color-mid);
-      margin-bottom: 0.5rem;
-    }
-
-    .pricing-card .price {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: var(--color-dark);
-      margin: 1rem 0;
-    }
-
-    .pricing-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 2rem;
-      text-align: center;
-      flex-grow: 1;
-    }
-
-    .pricing-card ul li {
-      margin: 0.6rem 0;
-      font-size: 1rem;
-    }
-
-
-
-    /* Highlighted (recommended) plan */
-    .pricing-card.highlight {
-      border: 2px solid var(--color-light);
-      transform: scale(1.05);
-    }
-
-    /* CTA Section */
-    .pricing-cta {
-      text-align: center;
-      background: #a8f3d0;
-      padding: 4rem 2rem;
-      margin: 4rem auto 4rem;
-    }
-
-    .pricing-cta .btn {
-  color: white;   /* or var(--color-dark) / any hex code */
-}
-
-
-    .pricing-cta h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--color-dark);
-    }
-
-    .pricing-cta p {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--color-dark);
-    }
-
-    
-body::before,
-body::after {
-  content: "";
-  position: fixed;      /* stays put while scrolling */
-  top: 0px;            /* start just below the navbar (80px tall) */
-  bottom: 0px;         /* stop just above the footer */
-  width: 250px;          /* thickness of the side bars */
-  background: var(--color-lighter);  /* light green shade */
-  z-index: -1;          /* sit behind everything */
-}
-
-body::before {
-  left: 0;
-}
-
-body::after {
-  right: 0;
-}
-  </style>
-</head>
-<body>
-<header>
-  <div class="navbar">
-    <div class="nav-left">
-      <a href="home.html" class="logo">
-        <img src="images/logo.png" alt="Logo" />
-        <span class="company-name">bXo Tutoring</span>
-      </a>
-    </div>
-
-    <nav class="nav-center">
-      <a href="home.html">Home</a>
-      <div class="dropdown">
-        <a href="about.html" class="dropbtn">About ▾</a>
-        <div class="dropdown-content">
-          <a href="tutors.html">Tutor Information</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | bXo Biology Tutoring</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/logo.png" alt="Logo" />
+            <span class="company-name">bXo Tutoring</span>
+          </a>
+        </div>
+        <nav class="nav-center">
+          <a href="home.html">Home</a>
+          <div class="dropdown">
+            <a class="dropbtn">About ▾</a>
+            <div class="dropdown-content">
+              <a href="about.html">Company Info</a>
+              <a href="tutors.html">Tutor Info</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn">Resources ▾</a>
+            <div class="dropdown-content">
+              <a href="module5.html">Module 5 - Heredity</a>
+              <a href="module6.html">Module 6 - Genetic Change</a>
+              <a href="module7.html">Module 7 - Infectious Disease</a>
+              <a href="module8.html">Module 8 - Non-infectious Disease and Disorders</a>
+              <a href="notes.html">Study Notes</a>
+              <a href="exams.html">Practice Exams</a>
+            </div>
+          </div>
+          <a href="pricing.html" class="active">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-right">
+          <!-- optional: right-side icons/buttons -->
         </div>
       </div>
-      <div class="dropdown">
-        <a href="resources.html" class="dropbtn">Resources ▾</a>
-        <div class="dropdown-content">
-          <a href="modules.html">Module 5 - Heredity</a>
-          <a href="modules.html">Module 6 - Genetic Change</a>
-          <a href="modules.html">Module 7 - Infectious Disease</a>
-          <a href="modules.html">Module 8 - Non-infectious Disease and Disorders</a>
+    </header>
+    <!-- Hero -->
+    <section class="small-hero">
+      <h2>Flexible Plans for Every Student</h2>
+      <p>Whether you need personalized 1-on-1 lessons or prefer collaborative group learning, our pricing is designed to fit your study style and budget.</p>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing-options">
+      <div class="pricing-container">
+        <!-- One-on-One Plan -->
+        <div class="pricing-option">
+          <img src="images/single.png" class="pricing-img" alt="One-on-One Tutoring">
+          <h3>One-on-One Tutoring</h3>
+          <p class="price">$60 / hr</p>
+          <ul>
+            <li>100% personalized attention</li>
+            <li>Flexible scheduling</li>
+            <li>Custom study plans for your goals</li>
+          </ul>
+          <a href="lessons.html?type=solo" class="btn">Book a Private Lesson</a>
+        </div>
+        <!-- Group Plan -->
+        <div class="pricing-option">
+          <img src="images/group.png" class="pricing-img" alt="Group Tutoring">
+          <h3>Group Tutoring</h3>
+          <p class="price">$40 / hr</p>
+          <ul>
+            <li>Learn with 3+ students</li>
+            <li>Collaborative & interactive</li>
+            <li>Affordable shared rate</li>
+          </ul>
+          <a href="lessons.html?type=group" class="btn">Join a Group Class</a>
         </div>
       </div>
-      <a href="pricing.html" class="active">Pricing</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<!-- Hero -->
-<section class="pricing-hero">
-  <h2>Flexible Plans for Every Student</h2>
-  <p>Whether you need personalized 1-on-1 lessons or prefer collaborative group learning, our pricing is designed to fit your study style and budget.</p>
-</section>
-
-<!-- Pricing Grid -->
-<section>
-  <div class="pricing-grid">
-
-        <!-- One-on-One Plan (highlighted) -->
-    <div class="pricing-card highlight">
-      <h4>One-on-One</h4>
-      <p class="price">$60 / hr</p>
-      <ul>
-        <li>Personalized private tutoring</li>
-        <li>Flexible scheduling</li>
-        <li>Focused attention on your goals</li>
-      </ul>
-      <a href="contact.html" class="btn">Book Now</a>
-    </div>
-
-
-    <!-- Class Plan -->
-    <div class="pricing-card">
-      <h4>Class</h4>
-      <p class="price">$40 / hr</p>
-      <ul>
-        <li>Requires 3+ students</li>
-        <li>Interactive group learning</li>
-        <li>Collaborative discussions</li>
-      </ul>
-      <a href="contact.html" class="btn">Join a Class</a>
-    </div>
-
-
-
-  </div>
-</section>
-
-<!-- Call to Action -->
-<section class="pricing-cta">
-  <h3>Not sure which plan is right for you?</h3>
-  <p>Let’s talk! Book a free consultation and we’ll recommend the best option to match your learning goals and schedule.</p>
-  <a href="contact.html" class="btn">Book a Free Consultation</a>
-</section>
-
-<!-- Footer -->
-<section class="footer-nav">
-  <div class="footer-brand">
-    <h4>bXo Tutoring</h4>
-    <p>We provide top-quality tutoring and resources to help you learn and grow. 
-       Join our community and take your skills to the next level!</p>
-  </div>
-
-  <div class="footer-links">
-    <h5>Modules</h5>
-    <ul>
-      <li><a href="Module5.html">Module 5</a></li>
-      <li><a href="Module6.html">Module 6</a></li>
-      <li><a href="Module7.html">Module 7</a></li>
-      <li><a href="Module8.html">Module 8</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Resources</h5>
-    <ul>
-      <li><a href="faqs.html">FAQs</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-links">
-    <h5>Company</h5>
-    <ul>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="tutors.html">Tutor</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </div>
-</section>
-
-<div class="footer-bottom">
-  © 2025 bXo Tutoring. All rights reserved.
+    </section>
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <h3>Not sure which plan is right for you?</h3>
+      <p>Let’s talk! Book a free consultation and we’ll recommend the best option to match your learning goals and schedule.</p>
+      <a href="contact.html" class="btn">Book a Free Consultation</a>
+    </section>
+    <section class="footer-nav">
+      <div class="footer-brand"><h4>bXo Tutoring</h4><p> We provide top-quality tutoring and resources to help you learn and grow. Join our community and take your skills to the next level! </p></div>
+      <div class="footer-links"><h5>Modules</h5><ul><li><a href="Module5.html">Module 5</a></li><li><a href="Module6.html">Module 6</a></li><li><a href="Module7.html">Module 7</a></li><li><a href="Module8.html">Module 8</a></li></ul></div>
+      <div class="footer-links"><h5>Resources</h5><ul><li><a href="home.html#faq">FAQs</a></li><li><a href="notes.html">Study Notes</a></li><li><a href="exams.html">Practice Exams</a></li></ul></div>
+      <div class="footer-links"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="tutors.html">Tutor</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </section>
+    <div class="footer-bottom">
+  © 2025 bXo Tutoring. All rights reserved. ∙ 
+  <a href="privacy.html">Privacy Policy</a> ∙ 
+  <a href="terms.html">Terms and Conditions</a>
 </div>
-</body>
+  </body>
 </html>
