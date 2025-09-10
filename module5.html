@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book a Lesson | bXo Biology Tutoring</title>
+    <title>Module 5 - Heredity | bXo</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body class="lesson-page">
+  <body>
+    <!-- Header -->
     <header>
       <div class="navbar">
         <div class="nav-left">
@@ -25,14 +26,14 @@
             </div>
           </div>
           <div class="dropdown">
-            <a class="dropbtn">Resources ▾</a>
+            <a class="dropbtn active">Resources ▾</a>
             <div class="dropdown-content">
-              <a href="module5.html">Module 5 - Heredity</a>
+              <a href="module5.html" class="active">Module 5 - Heredity</a>
               <a href="module6.html">Module 6 - Genetic Change</a>
               <a href="module7.html">Module 7 - Infectious Disease</a>
               <a href="module8.html">Module 8 - Non-infectious Disease and Disorders</a>
               <a href="notes.html">Study Notes</a>
-              <a href="exams.html">Exams</a>
+              <a href="exams.html">Practice Exams</a>
             </div>
           </div>
           <a href="pricing.html">Pricing</a>
@@ -43,139 +44,232 @@
         </div>
       </div>
     </header>
-    <!-- Leave confirmation modal -->
-    <div id="leave-modal" class="modal">
-      <div class="modal-content">
-        <p>Are you sure you want to leave? <br>Any changes will be lost. </p>
-        <div class="modal-buttons">
-          <button id="leave-yes" class="btn">Yes</button>
-          <button id="leave-no" class="btn">No</button>
+    <!-- Notes Section -->
+    <main class="notes-section">
+      <h1 class="module-title"> Module 5: Heredity </h1>
+      <p class="module-intro"> Life continues through reproduction and heredity. This module explores how genetic information is passed on, expressed, and studied. </p>
+      <div class="mentor-note">
+        <p>
+          <strong>Welcome!</strong> You’ve taken the first step to study this module — that’s not always easy, so give yourself credit. Biology has a lot of content, but take a seat and let me break it down for you.
+        </p>
+        <p>The first thing we’ll look at are the <em>learning outcomes</em>. It's just a roadmap, and the points sound way more complicated than they really are. But, they tell you exactly what skills and knowledge you’re meant to walk away with. </p>
+        <p>Keep them in mind as you go, because they’re what the examiners are looking for.</p>
+      </div>
+      <!-- Outcomes -->
+      <div class="outcomes-container">
+        <h2 class="no-margin">Learning Outcomes</h2>
+        <div class="outcome-box">
+          <p>
+            <strong>1.</strong>
+            <em>“selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media”</em>
+          </p>
+          <p>You’ll use numbers and observations and present them clearly using graphs tables, or diagrams.</p>
+        </div>
+        <div class="outcome-box">
+          <p>
+            <strong>2.</strong>
+            <em>“analyses and evaluates primary and secondary data and information”</em>
+          </p>
+          <p>You’ll practice deciding how trustworthy evidence is, comparing information from different sources.</p>
+        </div>
+        <div class="outcome-box">
+          <p>
+            <strong>3.</strong>
+            <em>“solves scientific problems using primary and secondary data, critical thinking skills and scientific processes”</em>
+          </p>
+          <p>You’ll use data and reasoning to solve science problems, just like real scientists do.</p>
+        </div>
+        <div class="outcome-box">
+          <p>
+            <strong>4.</strong>
+            <em>“explains the structures of DNA and analyses the mechanisms of inheritance and how processes of reproduction ensure continuity of species”</em>
+          </p>
+          <p>You’ll understand what makes up DNA and see how types of reproduction passes it on to keep species' going.</p>
         </div>
       </div>
-    </div>
-    <!-- Booking Form -->
-    <section class="contact-page">
-    <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
-          <h2 id="lesson-title" class="lesson-title"></h2>
-      <div class="form-group">
-        <label for="lesson-type">Lesson Type</label>
-        <input type="text" id="lesson-type" name="lesson-type" readonly>
-      </div>
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Your full name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="Optional: 123-456-7890">
-      </div>
-      <h3>Preferred Lesson Slots</h3>
-      <p>Pick a day and time range. Click "+" to add more slots.</p>
-      <div id="slots-container">
-        <div class="slot">
-          <label>Slot 1</label>
-          <input type="date" name="date1" required>
-          <input type="time" name="start1" required> to <input type="time" name="end1" required>
+      <!-- Content Focus -->
+      <div class="focus-container">
+        <h2 class="no-margin">Content Focus</h2>
+        <p> Life continues through the processes of reproduction and heredity. Students expand their knowledge of evolution by understanding the cellular processes involved in increasing genetic diversity. They investigate reproduction and inheritance patterns in both plants and animals as well as the role of DNA in polypeptide synthesis and the uses of technologies in the study of inheritance patterns. </p>
+        <p> Students also learn about contemporary research and the work of geneticists across a variety of industries, including medical applications and agriculture. They explore the effects on society and the environment through the application of genetic research. </p>
+        <!-- Simplified Explanation -->
+        <div class="mentor-note">
+          <p>
+            <strong>What this means for you:</strong> This module is about understanding <em>how life keeps going</em>. You’ll look at how plants, animals, and even bacteria reproduce, how DNA builds proteins, and how scientists use genetics in medicine and farming. You’ll also think about the impact of all this on people and the environment.
+          </p>
         </div>
       </div>
-      <button type="button" id="add-slot" class="btn">+ Add another slot</button>
-      <div class="form-group">
-        <label for="message">Additional Notes</label>
-        <textarea id="message" name="message" rows="4" placeholder="Anything else you'd like to share?"></textarea>
+      <!-- Working Scientifically -->
+      <div class="focus-container">
+        <h2 class="no-margin">Working Scientifically</h2>
+        <p> In this module, students focus on processing and representing data in appropriate formats to analyse and evaluate trends, relationships and patterns. Students derive and justify valid conclusions about the processes involved in heredity. Students should be provided with opportunities to engage with all Working Scientifically skills throughout the course. </p>
+        <!-- Simplified Explanation -->
+        <div class="mentor-note">
+          <p>
+            <strong>In simpler terms:</strong> You’ll be practicing how to <em>think and work like a scientist</em>. That means looking at data, spotting patterns, and deciding what the evidence is really saying. You’ll also get chances to test your ideas (or really just the ideas that the syllabus feeds you), present them clearly, and back them up with solid reasoning.
+          </p>
+        </div>
       </div>
-      <div class="form-group terms-container">
-        <input type="checkbox" id="terms" name="terms" required>
-        <label for="terms">I agree to the terms and privacy policy.</label>
+      <!-- Reproduction Section (main content + glossary sidebar) -->
+      <div class="content-section">
+        <!-- MAIN LEFT COLUMN -->
+        <div class="main">
+          <h2 class="section">Reproduction</h2>
+          <!-- Inquiry -->
+          <div class="inquiry">
+            <strong>Inquiry Question:</strong> How does reproduction ensure the continuity of a species?
+          </div>
+          <!-- Core content (concise, with examples) -->
+          <h3>Why reproduction matters</h3>
+          <p> Reproduction passes on an organism’s <strong>genetic information</strong> to the next generation so species persist. Two main strategies exist: <strong>asexual</strong> and <strong>sexual</strong>. </p>
+          <h3>Asexual reproduction — quick & identical</h3>
+          <p> One parent produces offspring that are genetically the same. Fast and efficient, but <strong>no genetic variation</strong>. </p>
+          <ul>
+            <li>
+              <strong>Plants:</strong>
+              <em>runners</em> (strawberry), <em>tubers</em> (potato).
+            </li>
+            <li>
+              <strong>Fungi:</strong> budding (yeast) or spores (mushrooms).
+            </li>
+            <li>
+              <strong>Bacteria:</strong> binary fission (E. coli)—one cell splits into two identical cells.
+            </li>
+            <li>
+              <strong>Protists:</strong> amoeba — binary fission.
+            </li>
+          </ul>
+          <h3>Sexual reproduction — variation that helps survival</h3>
+          <p> Two parents produce <strong>gametes</strong> (sperm + egg). Fertilisation mixes genes, producing variation that helps populations adapt. </p>
+          <h4>External vs internal fertilisation</h4>
+          <ul>
+            <li>
+              <strong>External:</strong> (e.g., frogs, many fish) eggs + sperm released into water — many offspring, low survival per egg.
+            </li>
+            <li>
+              <strong>Internal:</strong> (e.g., mammals, birds, reptiles) fertilisation inside the body — fewer offspring, higher survival/protection.
+            </li>
+          </ul>
+          <h4>Plants — pollination to seed</h4>
+          <p> Pollination (wind, insects, animals) transfers pollen to ovules. Fertilised ovules become <strong>seeds</strong> that grow into new plants (e.g., bee-pollinated apple trees). </p>
+          <h3>Mammalian reproduction (short, clear)</h3>
+          <p> After fertilisation the <strong>zygote</strong> becomes an embryo and implants into the <strong>uterus</strong>. Hormones (see glossary) control pregnancy and trigger birth when development is complete. </p>
+          <h3>Applications in agriculture (practical examples)</h3>
+          <ul>
+            <li>
+              <strong>Selective breeding:</strong> dairy cows bred for higher milk yield; wheat bred for disease resistance.
+            </li>
+            <li>
+              <strong>Artificial insemination:</strong> widely used in cattle to spread desirable genes without moving animals.
+            </li>
+            <li>
+              <strong>Controlled pollination / orchard management:</strong> hand pollination, timing and pollinator management to increase fruit set.
+            </li>
+            <li>
+              <strong>Micropropagation / cloning:</strong> tissue culture to produce identical crop plants (bananas, orchids).
+            </li>
+          </ul>
+          <!-- Sparse author note -->
+          <div class="mentor-note short-tip">
+            <p>
+              <strong>Short tip:</strong> remember the trade-off — asexual = speed, sexual = variation. Think which strategy helps a species survive in a stable vs. changing environment.
+            </p>
+          </div>
+        </div>
+        <!-- /main -->
+        <!-- RIGHT SIDEBAR: glossary (must be child of .content-section) -->
+        <aside class="glossary" aria-label="Glossary of terms">
+          <h4>Quick Glossary</h4>
+          <dl>
+            <dt>Gametes</dt>
+            <dd>Sex cells: sperm (male) and egg (female).</dd>
+            <dt>Zygote</dt>
+            <dd>The first cell formed when sperm and egg fuse.</dd>
+            <dt>Uterus</dt>
+            <dd>The mammal organ where embryos develop.</dd>
+            <dt>Binary fission</dt>
+            <dd>Simple cell division in bacteria: 1 → 2 identical cells.</dd>
+            <dt>Pollination</dt>
+            <dd>Transfer of pollen from the anther to the stigma (leads to fertilisation in plants).</dd>
+            <dt>Progesterone</dt>
+            <dd>A hormone that helps maintain the uterine lining during pregnancy.</dd>
+            <dt>Oestrogen</dt>
+            <dd>A hormone that regulates female reproductive cycles and supports pregnancy.</dd>
+          </dl>
+        </aside>
       </div>
-      <button type="submit" id="submit-btn">Submit Request</button>
-    </form>
-  </section>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get("type");
-        const lessonTypeInput = document.getElementById("lesson-type");
-        const lessonTitle = document.getElementById("lesson-title"); // 👈 grab the h2
-        if (type === "solo") {
-          lessonTypeInput.value = "One-on-One Tutoring";
-          lessonTitle.textContent = "Book a One-on-One Tutoring Session"; 
-        } else if (type === "group") {
-          lessonTypeInput.value = "Group Tutoring";
-          lessonTitle.textContent = "Book a Group Tutoring Session"; 
-        }
-        const slotsContainer = document.getElementById("slots-container");
-        const addSlotButton = document.getElementById("add-slot");
-
-        function updateSlotNumbers() {
-          const slots = slotsContainer.querySelectorAll(".slot");
-          slots.forEach((slot, index) => {
-            slot.querySelector("label").textContent = `Slot ${index + 1}`;
-          });
-        }
-
-        function createSlot() {
-          const slotDiv = document.createElement("div");
-          slotDiv.classList.add("slot");
-          slotDiv.innerHTML = `
-      
-															<label></label>
-															<input type="date" required>
-																<input type="time" required> to 
-      
-																	<input type="time" required>
-																		<button type="button" class="remove-slot">Remove</button>
-    `;
-          slotDiv.querySelector(".remove-slot").addEventListener("click", () => {
-            removeSlotAnimated(slotDiv);
-          });
-          slotsContainer.appendChild(slotDiv);
-          updateSlotNumbers();
-        }
-
-        function removeSlotAnimated(slotDiv) {
-          slotDiv.style.opacity = '0';
-          slotDiv.style.transform = 'translateY(-20px)';
-          slotDiv.addEventListener('transitionend', () => {
-            slotDiv.remove();
-            updateSlotNumbers();
-          });
-        }
-        updateSlotNumbers();
-        addSlotButton.addEventListener("click", createSlot);
-      });
-      // Track form changes and warn before leaving
-      let formChanged = false;
-      const form = document.querySelector(".contact-form");
-      form.addEventListener("input", () => formChanged = true);
-      window.addEventListener("beforeunload", function(e) {
-        if (formChanged) {
-          e.preventDefault();
-          e.returnValue = "";
-        }
-      });
-      const links = document.querySelectorAll("a");
-      const leaveModal = document.getElementById("leave-modal");
-      const leaveYes = document.getElementById("leave-yes");
-      const leaveNo = document.getElementById("leave-no");
-      links.forEach(link => {
-        link.addEventListener("click", function(e) {
-          if (formChanged) {
-            e.preventDefault();
-            leaveModal.style.display = "flex";
-            leaveYes.onclick = () => {
-              formChanged = false;
-              window.location.href = link.href;
-            };
-            leaveNo.onclick = () => {
-              leaveModal.style.display = "none";
-            };
-          }
-        });
-      });
-    </script>
+      <!-- /content-section -->
+      <!-- Cell Replication -->
+      <h2 class="section">Cell Replication</h2>
+      <div class="inquiry">
+        <strong>Inquiry Question:</strong> How important is it for genetic material to be replicated exactly?
+      </div>
+      <ul>
+        <li>Model mitosis and meiosis</li>
+        <li>Model DNA replication using the Watson and Crick model, showing nucleotide composition, pairing and bonding</li>
+        <li>Assess the effects of replication on species continuity</li>
+      </ul>
+      <!-- DNA and Polypeptide Synthesis -->
+      <h2 class="section">DNA and Polypeptide Synthesis</h2>
+      <div class="inquiry">
+        <strong>Inquiry Question:</strong> Why is polypeptide synthesis important?
+      </div>
+      <ul>
+        <li>Compare DNA forms in eukaryotes and prokaryotes</li>
+        <li>Model transcription and translation, analysing roles of mRNA and tRNA</li>
+        <li>Explain importance of polypeptide synthesis and gene–environment interactions in phenotypes</li>
+        <li>Investigate the structure and function of proteins in living things</li>
+      </ul>
+      <!-- Genetic Variation -->
+      <h2 class="section">Genetic Variation</h2>
+      <div class="inquiry">
+        <strong>Inquiry Question:</strong> How can the genetic similarities and differences within and between species be compared?
+      </div>
+      <ul>
+        <li>Model variation in offspring through meiosis, crossing over, fertilisation and mutation</li>
+        <li>Interpret inheritance patterns: <ul>
+            <li>Autosomal traits</li>
+            <li>Sex-linkage</li>
+            <li>Co-dominance</li>
+            <li>Incomplete dominance</li>
+            <li>Multiple alleles</li>
+          </ul>
+        </li>
+        <li>Use pedigrees and Punnett squares to model inheritance</li>
+        <li>Collect and analyse population frequency data, including SNP analysis</li>
+      </ul>
+      <!-- Inheritance Patterns -->
+      <h2 class="section">Inheritance Patterns in a Population</h2>
+      <div class="inquiry">
+        <strong>Inquiry Question:</strong> Can population genetic patterns be predicted with any accuracy?
+      </div>
+      <ul>
+        <li>Investigate use of technologies such as DNA sequencing and profiling to determine inheritance patterns</li>
+        <li>Analyse large-scale collaborative data to identify trends, e.g.: <ul>
+            <li>Population genetics in conservation</li>
+            <li>Inheritance of diseases or disorders</li>
+            <li>Human evolution studies</li>
+          </ul>
+        </li>
+      </ul>
+    </main>
+    <!-- CTA -->
+    <section class="cta-section">
+      <h3>Boost Your Understanding of Module 5</h3>
+      <p>Explore detailed examples, practice exam-style questions, and get support from expert tutors to master Heredity.</p>
+      <a href="contact.html" class="btn">Book a Free Session</a>
+    </section>
+    <!-- Footer -->
+    <section class="footer-nav">
+      <div class="footer-brand"><h4>bXo Tutoring</h4><p> We provide top-quality tutoring and resources to help you learn and grow. Join our community and take your skills to the next level! </p></div>
+      <div class="footer-links"><h5>Modules</h5><ul><li><a href="Module5.html">Module 5</a></li><li><a href="Module6.html">Module 6</a></li><li><a href="Module7.html">Module 7</a></li><li><a href="Module8.html">Module 8</a></li></ul></div>
+      <div class="footer-links"><h5>Resources</h5><ul><li><a href="home.html#faq">FAQs</a></li><li><a href="notes.html">Study Notes</a></li><li><a href="exams.html">Practice Exams</a></li></ul></div>
+      <div class="footer-links"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="tutors.html">Tutor</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </section>
+    <div class="footer-bottom">
+  © 2025 bXo Tutoring. All rights reserved. ∙ 
+  <a href="privacy.html">Privacy Policy</a> ∙ 
+  <a href="terms.html">Terms and Conditions</a>
+</div>
   </body>
 </html>
