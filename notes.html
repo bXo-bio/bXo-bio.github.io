@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Study Notes | bXo Tutoring</title>
+    <meta name="description" content="Free, downloadable HSC Biology study notes for Module 5–8. Search, preview and download PDF notes.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Page-specific tiny CSS (paste into style.css if you prefer) -->
+    <style>
+    /* Notes page: lightweight enhancements using existing variables */
+    .notes-hero { padding: 4.5rem 1rem; text-align: center; background: linear-gradient(180deg, rgba(20,40,80,0.85), rgba(20,40,80,0.85)), url('images/biology-notes-hero.jpg') center/cover no-repeat; color: var(--color-white); border-bottom: 3px solid var(--color-mid); }
+    .notes-hero h1 { font-size: 2.6rem; margin-bottom: 0.5rem; }
+    .notes-hero p { font-size: 1.05rem; max-width: 62ch; margin: 0 auto 1rem; }
+
+    .notes-toolbox { max-width: var(--max-site-width, 1180px); margin: -28px auto 1.5rem; padding: 0 1.25rem; display:flex; gap:1rem; align-items:center; justify-content:space-between; }
+    .search-wrap { flex:1; display:flex; gap:0.75rem; align-items:center; }
+    .search-input { flex:1; padding:0.8rem 1rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-xs); font-size:1rem; }
+    .chip-list { display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap; }
+    .chip { padding:0.5rem 0.75rem; background:var(--color-white); border-radius:999px; box-shadow: var(--shadow-xs); cursor:pointer; font-weight:600; border: 1px solid rgba(13,59,102,0.04); }
+    .chip.active { background: linear-gradient(180deg,var(--color-mid),var(--color-dark)); color:var(--color-white); box-shadow: 0 8px 20px rgba(13,59,102,0.08); }
+
+    .notes-grid { max-width: var(--max-site-width); margin: 1rem auto 3rem; padding: 0 1.25rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; }
+    .note-card { background: var(--color-white); border-radius: 12px; box-shadow: var(--shadow-md); padding: 1rem; display:flex; flex-direction:column; gap:0.75rem; transition: transform .28s ease, box-shadow .28s ease; }
+    .note-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(13,59,102,0.08); }
+    .note-thumb { width:100%; height:140px; border-radius: 8px; object-fit:cover; background: linear-gradient(180deg, rgba(74,144,226,0.08), rgba(30,95,169,0.06)); display:flex; align-items:center; justify-content:center; color:var(--color-mid); font-weight:700; }
+    .note-title { font-size:1.05rem; color:var(--color-dark); font-weight:700; }
+    .note-meta { color:#666; font-size:0.95rem; }
+    .note-actions { margin-top:auto; display:flex; gap:0.5rem; }
+    .btn-ghost { background: transparent; color: var(--color-mid); border: 1px solid rgba(30,95,169,0.08); padding:0.55rem 0.8rem; border-radius:10px; }
+
+    /* PDF preview modal */
+    .pdf-modal { position:fixed; inset:0; display:none; justify-content:center; align-items:center; background: rgba(0,0,0,0.6); z-index:9999; }
+    .pdf-modal.open { display:flex; }
+    .pdf-frame { width: min(1200px, 94%); height: min(85vh, 820px); background: #fff; border-radius: 12px; overflow:hidden; box-shadow: var(--shadow-lg); }
+    .pdf-frame header { display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1rem; background: var(--color-mid); color:#fff; }
+    .pdf-frame iframe { width:100%; height: calc(100% - 48px); border: none; }
+
+    /* empty / fallback state */
+    .notes-empty { text-align:center; padding: 3rem 1rem; color:#777; }
+
+    /* accessibility focus */
+    .note-card:focus-within { outline: 3px solid rgba(74,144,226,0.14); }
+
+    @media (max-width:900px) {
+      .notes-toolbox { flex-direction:column; align-items:stretch; gap:0.75rem; }
+      .search-wrap { order:1; }
+      .chip-list { order:2; }
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Header (kept from site) -->
+    <header>
+      <div class="navbar">
+        <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/logo.png" alt="bXo logo" />
+            <span class="company-name">bXo Tutoring</span>
+          </a>
+        </div>
+        <nav class="nav-center" role="navigation" aria-label="Main navigation">
+          <a href="home.html">Home</a>
+          <div class="dropdown">
+            <a class="dropbtn">About ▾</a>
+            <div class="dropdown-content">
+              <a href="about.html">Company Info</a>
+              <a href="tutors.html">Tutor Info</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn active">Resources ▾</a>
+            <div class="dropdown-content">
+              <a href="module5.html">Module 5 - Heredity</a>
+              <a href="module6.html">Module 6 - Genetic Change</a>
+              <a href="module7.html">Module 7 - Infectious Disease</a>
+              <a href="module8.html">Module 8 - Non-infectious Disease and Disorders</a>
+              <a href="notes.html" class="active">Study Notes</a>
+              <a href="exams.html">Practice Exams</a>
+            </div>
+          </div>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-right"></div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="small-hero">
+      <div class="container">
+        <h2>Study Notes</h2>
+        <p>Free, downloadable HSC Biology notes — organised by module and searchable so you can find what you need fast.</p>
+        <div class="mt-md">
+          <a href="pricing.html" class="btn cta-pulse">Book a free trial</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbox: search + filters -->
+    <div class="notes-toolbox" role="region" aria-label="Notes toolbox">
+      <div class="search-wrap">
+        <input id="notes-search" class="search-input" placeholder="Search notes, topics or keywords (e.g. 'mutation', 'immunity')" aria-label="Search notes">
+        <button id="clear-search" class="btn-ghost" aria-label="Clear search">Clear</button>
+      </div>
+
+      <div class="chip-list" role="toolbar" aria-label="Filter by module">
+        <button class="chip active" data-module="all">All</button>
+        <button class="chip" data-module="module5">Module 5</button>
+        <button class="chip" data-module="module6">Module 6</button>
+        <button class="chip" data-module="module7">Module 7</button>
+        <button class="chip" data-module="module8">Module 8</button>
+      </div>
+    </div>
+
+    <!-- Notes grid -->
+    <main class="notes-grid" id="notesGrid">
+      <!-- Example note card: duplicate/paste for each PDF or generate via server-side templating -->
+
+      <article class="note-card" data-module="module5" tabindex="0">
+        <div class="note-thumb" aria-hidden="true">
+          <img src="images/pdfs/module5-thumb.jpg" alt="Module 5 thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div>
+          <div class="note-title">Module 5 — Heredity (Comprehensive Notes)</div>
+          <div class="note-meta">PDF • 28 pages • Updated 2025</div>
+        </div>
+        <div class="note-actions">
+          <a class="btn" href="pdfs/heredity-notes.pdf" target="_blank" rel="noopener noreferrer">Download</a>
+          <button class="btn btn-ghost preview-btn" data-src="pdfs/heredity-notes.pdf">Preview</button>
+        </div>
+      </article>
+
+      <article class="note-card" data-module="module6" tabindex="0">
+        <div class="note-thumb">
+          <img src="images/pdfs/module6-thumb.jpg" alt="Module 6 thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div>
+          <div class="note-title">Module 6 — Genetic Change (Summary)</div>
+          <div class="note-meta">PDF • 18 pages • Updated 2024</div>
+        </div>
+        <div class="note-actions">
+          <a class="btn" href="pdfs/genetic-change-notes.pdf" target="_blank" rel="noopener noreferrer">Download</a>
+          <button class="btn btn-ghost preview-btn" data-src="pdfs/genetic-change-notes.pdf">Preview</button>
+        </div>
+      </article>
+
+      <article class="note-card" data-module="module7" tabindex="0">
+        <div class="note-thumb">
+          <img src="images/pdfs/module7-thumb.jpg" alt="Module 7 thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div>
+          <div class="note-title">Module 7 — Infectious Disease (Exam Focus)</div>
+          <div class="note-meta">PDF • 22 pages • Updated 2024</div>
+        </div>
+        <div class="note-actions">
+          <a class="btn" href="pdfs/infectious-disease-notes.pdf" target="_blank" rel="noopener noreferrer">Download</a>
+          <button class="btn btn-ghost preview-btn" data-src="pdfs/infectious-disease-notes.pdf">Preview</button>
+        </div>
+      </article>
+
+      <article class="note-card" data-module="module8" tabindex="0">
+        <div class="note-thumb">
+          <img src="images/pdfs/module8-thumb.jpg" alt="Module 8 thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div>
+          <div class="note-title">Module 8 — Non-infectious Disease & Disorders</div>
+          <div class="note-meta">PDF • 20 pages • Updated 2024</div>
+        </div>
+        <div class="note-actions">
+          <a class="btn" href="pdfs/noninfectious-notes.pdf" target="_blank" rel="noopener noreferrer">Download</a>
+          <button class="btn btn-ghost preview-btn" data-src="pdfs/noninfectious-notes.pdf">Preview</button>
+        </div>
+      </article>
+
+    </main>
+
+    <div class="notes-empty" id="notesEmpty" hidden>
+      <p>No notes match your search. Try a different keyword or clear filters.</p>
+      <p><a href="contact.html" class="btn btn-ghost">Request a topic</a></p>
+    </div>
+
+    <!-- PDF preview modal -->
+    <div class="pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="PDF preview">
+      <div class="pdf-frame" role="document">
+        <header>
+          <div class="pdf-title">Preview</div>
+          <div>
+            <button id="openFull" class="btn btn-ghost">Open full PDF</button>
+            <button id="closeModal" class="btn">Close</button>
+          </div>
+        </header>
+        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
+      </div>
+    </div>
+
+    <!-- Footer (kept) -->
+    <section class="footer-nav">
+      <div class="footer-brand"><h4>bXo Tutoring</h4><p> We provide top-quality tutoring and resources to help you learn and grow. Join our community and take your skills to the next level! </p></div>
+      <div class="footer-links"><h5>Modules</h5><ul><li><a href="Module5.html">Module 5</a></li><li><a href="Module6.html">Module 6</a></li><li><a href="Module7.html">Module 7</a></li><li><a href="Module8.html">Module 8</a></li></ul></div>
+      <div class="footer-links"><h5>Resources</h5><ul><li><a href="home.html#faq">FAQs</a></li><li><a href="notes.html">Study Notes</a></li><li><a href="exams.html">Practice Exams</a></li></ul></div>
+      <div class="footer-links"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="tutors.html">Tutor</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </section>
+    <div class="footer-bottom">
+  © 2025 bXo Tutoring. All rights reserved. ∙ 
+  <a href="privacy.html">Privacy Policy</a> ∙ 
+  <a href="terms.html">Terms and Conditions</a>
+</div>
+
+    <!-- Page JS: search, filters, preview modal, accessibility -->
+    <script>
+    (function(){
+      const searchInput = document.getElementById('notes-search');
+      const clearBtn = document.getElementById('clear-search');
+      const chips = Array.from(document.querySelectorAll('.chip'));
+      const notesGrid = document.getElementById('notesGrid');
+      const notes = Array.from(notesGrid.querySelectorAll('.note-card'));
+      const emptyState = document.getElementById('notesEmpty');
+
+      // filter state
+      let activeModule = 'all';
+
+      // helpers
+      function normalize(s){ return String(s).trim().toLowerCase(); }
+
+      function applyFilters(){
+        const q = normalize(searchInput.value);
+        let visibleCount = 0;
+        notes.forEach(card => {
+          const module = card.getAttribute('data-module') || 'all';
+          const title = normalize(card.querySelector('.note-title').textContent);
+          const meta = normalize(card.querySelector('.note-meta').textContent);
+
+          const matchesModule = (activeModule === 'all') || (module === activeModule);
+          const matchesQuery = !q || title.includes(q) || meta.includes(q);
+
+          const show = matchesModule && matchesQuery;
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+
+        emptyState.hidden = visibleCount > 0;
+      }
+
+      // search debounce
+      let debounceTimer = null;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(applyFilters, 180);
+      });
+
+      clearBtn.addEventListener('click', () => { searchInput.value = ''; applyFilters(); searchInput.focus(); });
+
+      // chips: module filter
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          activeModule = chip.getAttribute('data-module') || 'all';
+          applyFilters();
+        });
+      });
+
+      // preview modal
+      const modal = document.getElementById('pdfModal');
+      const pdfFrame = document.getElementById('pdfFrame');
+      const closeModal = document.getElementById('closeModal');
+      const openFull = document.getElementById('openFull');
+
+      document.querySelectorAll('.preview-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const src = btn.getAttribute('data-src');
+          if (!src) return;
+          pdfFrame.src = src;
+          openFull.setAttribute('data-src', src);
+          modal.classList.add('open');
+          // trap focus
+          modal.querySelector('.pdf-frame').focus();
+        });
+      });
+
+      closeModal.addEventListener('click', () => { closePreview(); });
+      openFull.addEventListener('click', () => { const s = openFull.getAttribute('data-src'); if (s) window.open(s, '_blank', 'noopener'); });
+
+      modal.addEventListener('click', (e) => { if (e.target === modal) closePreview(); });
+
+      function closePreview(){ modal.classList.remove('open'); pdfFrame.src = ''; }
+
+      // keyboard: close on Escape
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closePreview(); });
+
+      // initial filter run
+      applyFilters();
+
+      // lazy-load thumbnails: encourage using real <img loading="lazy"> in production
+      document.querySelectorAll('.note-thumb img').forEach(img => {
+        if ('loading' in HTMLImageElement.prototype) {
+          img.loading = 'lazy';
+        }
+      });
+
+    })();
+    </script>
+  </body>
+</html>
