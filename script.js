@@ -1,32 +1,33 @@
-// script.js
-window.addEventListener("scroll", function () {
-  const header = document.querySelector("header");
-  if (window.scrollY > 0) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-
-// FAQ accordion toggle (smooth with scrollHeight)
+// FAQ Accordion - Independent Toggle
 document.addEventListener("DOMContentLoaded", () => {
   const faqs = document.querySelectorAll(".faq");
 
-  faqs.forEach((faq) => {
-    const btn = faq.querySelector(".faq-question");
+  faqs.forEach(faq => {
+    const questionBtn = faq.querySelector(".faq-question");
     const answer = faq.querySelector(".faq-answer");
 
-    btn.addEventListener("click", () => {
+    questionBtn.addEventListener("click", () => {
+      faq.classList.toggle("active");
+
       if (faq.classList.contains("active")) {
-        // close
-        answer.style.maxHeight = null;
-        faq.classList.remove("active");
+        answer.style.maxHeight = answer.scrollHeight + "px"; // expand
       } else {
-        // open (close others if you want accordion behavior)
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        faq.classList.add("active");
+        answer.style.maxHeight = null; // collapse
       }
     });
   });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.module-card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  cards.forEach(card => observer.observe(card));
 });
 
