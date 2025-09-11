@@ -1,14 +1,10 @@
-/* =====================================================
-   Variables
-   (kept original variable names & values)
-   ===================================================== */
 :root {
   --color-dark: #0d3b66;            /* Deep navy blue */
   --color-dark-rgba: rgba(13, 59, 102, 0.8);
   --color-mid: #1e5fa9;             /* Strong medium blue */
   --color-light: #4a90e2;           /* Bright blue */
-  --color-lighter: #94ccfa;         /* Light pastel blue */
-  --color-bg: #dfefff;              /* Very soft blue background */
+  --color-lighter: #a3c9f9;         /* Light pastel blue */
+  --color-bg: #eaf4ff;              /* Very soft blue background */
   --color-text: #333;
   --color-white: #ffffff;
   --color-darker: #062644;
@@ -27,22 +23,16 @@
   --shadow-lg: 0 6px 14px rgba(13, 59, 102, 0.15);
   --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.1);
 
+
   --transition: 0.3s ease;
   --transition-fast: 0.2s ease;
 }
 
-/* =====================================================
-   Reset & Base
-   ===================================================== */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
-
-html, 
-body { 
-  height: 100%; 
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -51,27 +41,242 @@ body {
   background: #fcfcfc;
   color: var(--color-text);
   overflow-x: hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  padding-top: 60px;
 }
 
-/* Headings & typography basics */
-h1,h2,h3,h4,h5,h6 { 
-  color: var(--color-dark); 
-  font-weight: 700; 
+/* Utilities */
+.mt-lg { margin-top: 3rem; }
+.mt-md { margin-top: 1.5rem; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+/* =====================================================
+   Navbar
+===================================================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 70px;
+  background: var(--color-mid);
+  box-shadow: var(--shadow-sm);
 }
 
-p, ul, ol, dl { 
-  margin-bottom: 1rem; 
+.navbar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 70px;
+  padding: 0 var(--space-sm);
 }
 
-/* Links */
-a { 
-  color: inherit; 
-  text-decoration: none; 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0; /* prevent shrinking */
 }
 
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.nav-right {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* All main nav buttons */
+.nav-center a,
+.nav-center .dropbtn {
+  display: flex;               /* flex to center text */
+  justify-content: center;
+  align-items: center;
+  width: 130px;                /* consistent width for all nav buttons */
+  padding: 0.5rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: normal;
+}
+
+/* Dropdown content links */
+.dropdown-content a {
+  display: block;             /* fill the dropdown container */
+  width: 100%;                /* match parent width */
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  text-align: left;           /* optional: keep dropdown text left-aligned */
+}
+
+/* Dropdown hover highlight */
+.dropdown:hover .dropbtn {
+  width: 130px;               /* ensure hover matches button width */
+}
+
+.logo img {
+  height: 85px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.company-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-lighter);
+  text-decoration: none;
+}
+
+/* Navigation links */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+nav a,
+.dropbtn {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 0 var(--space-md); 
+  color: var(--color-white);
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Active nav link (highlighted box) */
+nav a.active,
+.dropbtn.active {
+  color: var(--color-lighter) !important;
+  background: none !important;
+}
+
+/* Animated underline effect */
+nav a,
+.dropbtn {
+  overflow: hidden; /* keeps the underline aligned */
+}
+
+nav a::after,
+.dropbtn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;               /* sits at bottom of the button */
+  left: 50%;               /* start from center */
+  width: 100%;
+  height: 2px;
+  background: rgba(100, 145, 204, 0.9);
+  transform: translateX(-50%) scaleX(0); /* hidden initially */
+  transform-origin: center; /* animate outwards from center */
+  transition: transform 0.3s ease;
+}
+
+/* Hide underline for the active/current page */
+nav a.active::after,
+.dropbtn.active::after {
+  display: none;
+}
+
+nav a:hover::after,
+.dropbtn:hover::after {
+  transform: translateX(-50%) scaleX(1); /* expand to full width */
+  height: 0.2rem;
+}
+
+
+
+nav a:hover,
+.dropbtn:hover {
+  color: var(--color-lighter);
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--color-white);
+  width: 210px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.4rem 0.8rem; /* less padding so items are shorter */
+  font-size: 0.95rem;     /* slightly smaller text */
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: background var(--transition);
+}
+
+.dropdown-content a:hover {
+  background: var(--color-bg);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn.active {
+  background: var(--color-mid);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+/* =====================================================
+   Hero
+===================================================== */
+.hero {
+  text-align: center;
+  padding: 10rem 2rem;
+background: linear-gradient(to bottom, rgba(20, 40, 80, 0.7), rgba(20, 40, 80, 0.7)),
+            url("images/biology-bg.jpg") center/cover no-repeat;
+  background-attachment: fixed;  /* 🔥 Parallax effect */
+  background-position: center;
+  background-size: cover;
+  color: var(--color-dark);
+        border-bottom: 4px solid var(--color-mid);
+}
+
+
+.hero h2 {
+  font-size: 3rem;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* x-offset, y-offset, blur, color */
+}
+
+
+.hero p {
+  font-size: 1.3rem;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* x-offset, y-offset, blur, color */
+}
+
+/* =====================================================
+   Buttons
+===================================================== */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -80,7 +285,7 @@ a {
   font-family: "Segoe UI", Tahoma, sans-serif;
   font-size: 1rem;
   text-decoration: none;
-  background: var(--color-mid);
+  background: var(--color-light);
   color: var(--color-white);
   border: none;
   outline: none;
@@ -91,32 +296,8 @@ a {
 
 }
 
-.btn {
-  position: relative; /* needed for pseudo-element */
-  overflow: hidden;   /* keep shimmer inside */
-}
-
-/* shimmer effect (initially offscreen) */
-.btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;        /* fully offscreen left */
-  width: 50%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: skewX(-20deg);
-  transition: none;   /* no transition until hover */
-}
-
-/* animate shimmer only on hover */
-.btn:hover::after {
-  left: 125%;          /* moves across button */
-  transition: left 0.5s;
-}
-
 .btn:hover {
-  background: var(--color-light);
+  background: var(--color-mid);
   transform: translateY(-6px); /* lift effect */
   box-shadow: 0 6px 0 var(--color-dark), 0 12px 20px rgba(0, 0, 0, 0.25);
 }
@@ -126,369 +307,101 @@ a {
   box-shadow: 0 2px 0 var(--color-dark), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Utilities - small set used in HTML */
-.mt-lg { margin-top: 3rem; }
-.mt-md { margin-top: 1.5rem; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-
-/* =====================================================
-   Layout: Navbar & Header
-   ===================================================== */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;   /* make sure it spans across the screen */
-  z-index: 1000;
-  height: 70px;
-  background: var(--color-mid);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Navbar container */
-.navbar {
-  display: flex;
-  align-items: center;
-  position: relative;
-  height: 70px;
-  padding: 0 var(--space-sm);
-
-}
-
-/* left / center / right */
-.nav-left { 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  flex-shrink: 0; 
-}
-
-.nav-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
-
-.nav-right { 
-  display: flex; 
-  flex-shrink: 0; 
-}
-
-/* Logo */
-.logo { 
-  display: flex; 
-  align-items: center; 
-  text-decoration: none; 
-}
-
-.logo img { 
-  height: 85px; 
-}
-
-.company-name { 
-  font-weight: 700; 
-  font-size: 1.5rem; 
-  color: var(--color-lighter); 
-  margin-left: 0.5rem; 
-  text-decoration: none;
-}
-
-/* Main nav links + dropdown button base */
-nav { 
-  display: flex; 
-  align-items: center; 
-}
-
-nav a, 
-.dropbtn {
-  display: flex;
-  align-items: center;
-  height: 70px;
-  padding: 0 var(--space-md); 
-  color: var(--color-white);
-  position: relative;
-  font-weight: 500;
-  transition: background var(--transition), color var(--transition);
-  user-select: none;
-}
-
-/* Active link styling (keeps it visible) */
-nav a.active, 
-.dropbtn.active { 
-  color: var(--color-lighter) !important; 
-  background: none !important; 
-}
-
-nav a:hover, 
-.dropbtn:hover { 
-  color: var(--color-lighter); 
-}
-
-/* Animated underline effect */
-nav a::after, 
-.dropbtn::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 100%;
-  height: 2px;
-  background: rgba(100, 145, 204, 0.9);
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-nav a:hover::after, 
-.dropbtn:hover::after { 
-  transform: translateX(-50%) scaleX(1); 
-  height: 0.2rem; 
-}
-
-nav a.active::after, 
-.dropbtn.active::after { 
-  display: none; 
-}
-
-/* Dropdowns */
-.dropdown { 
-  position: relative; 
-  overflow: visible; 
-}
-
-.dropdown-content {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--color-white);
-  width: 220px;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  z-index: 1000;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-}
-
-
-.dropdown-content a {
-  display: block;
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  text-decoration: none;
+/* Enroll variation */
+.btn.enroll {
+  background: var(--color-light);
   color: var(--color-dark);
-  background: transparent;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 5px 0 var(--color-mid), 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-.dropdown-content a:hover { 
-  background: var(--color-bg); 
-
+.btn.enroll:hover {
+  background: var(--color-lighter);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-mid), 0 12px 20px rgba(0, 0, 0, 0.25);
 }
 
-.dropdown:hover .dropdown-content a {
-  transform: translateY(0);
-  opacity: 1;
+.btn.enroll:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--color-mid), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.dropdown-content a:nth-child(1) { transition-delay: 0.03s; }
-.dropdown-content a:nth-child(2) { transition-delay: 0.06; }
-.dropdown-content a:nth-child(3) { transition-delay: 0.09s; }
-.dropdown-content a:nth-child(4) { transition-delay: 0.12s; }
-.dropdown-content a:nth-child(5) { transition-delay: 0.15s; }
-.dropdown-content a:nth-child(6) { transition-delay: 0.18s; }
-
-.dropdown:hover .dropdown-content {
-  max-height: 500px; /* enough for all items */
-  opacity: 1;
-}
-
-.dropdown-content a + a {
-  border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-/* small tweak for currently-open dropbtn */
-.dropbtn.active { 
-  background: var(--color-mid); 
-  color: var(--color-white); 
-  font-weight: 600; 
-}
-
-
-/* =====================================================
-   Hero Sections
-   (hero & small-hero share many rules; keep both)
-   ===================================================== */
-
-.hero h2, .hero p {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s forwards;
-}
-
-.hero h2 { animation-delay: 0.1s; }
-.hero p { animation-delay: 0.2s; }
-.hero .btn { animation-delay: 0.3s; }
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animate the wrapper instead of the button */
-.hero-btn-wrapper {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s forwards;
-  animation-delay: 0.5s; /* adjust timing */
-  display: inline-block; /* needed for transform */
-}
-
-/* Button itself handles hover separately */
-.hero .btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hero .btn:hover {
-  transform: translateY(-6px); /* independent lift */
-  box-shadow: 0 6px 0 var(--color-dark), 0 12px 20px rgba(0,0,0,0.25);
-}
-
-/* Keyframes for wrapper fade-up */
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-
-.hero {
-  text-align: center;
-  padding: 10rem 2rem;
-  background: linear-gradient(to bottom, rgba(20, 40, 80, 0.7), rgba(20, 40, 80, 0.7)),
-              url("images/biology-bg.jpg") center/cover no-repeat;
-  background-attachment: fixed; /* parallax */
-  background-position: center;
-  background-size: cover;
-  border-bottom: 4px solid var(--color-mid);
-}
-
-.hero h2 { 
-  font-size: 3rem; 
-  color: var(--color-white); 
-  margin-bottom: var(--space-md); 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-.hero p  { 
-  font-size: 1.3rem; 
-  color: var(--color-white); 
-  margin-bottom: var(--space-lg); 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-.small-hero {
-  text-align: center;
-  padding: 5rem 2rem;
-  background: linear-gradient(to bottom, rgba(20, 40, 80, 0.7), rgba(20, 40, 80, 0.7)),
-              url("images/biology-bg-small.jpg") center 100%/cover no-repeat;
-  background-attachment: fixed; /* parallax */
-  background-size: cover;
+/* Outline variation */
+.btn-outline {
+  border: 2px solid var(--color-white);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-sm);
   color: var(--color-white);
-  border-bottom: 2px solid var(--color-light);
+  font-weight: bold;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 0 var(--color-dark), 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.small-hero h2 { 
-  font-size: 2.8rem; 
-  color: var(--color-white); 
-  margin-bottom: 1rem; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+.btn-outline:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-dark), 0 10px 18px rgba(0, 0, 0, 0.25);
 }
 
-.small-hero p { 
-  font-size: 1.2rem; 
-  max-width: 700px; 
-  margin: 0 auto; 
-  line-height: 1.7; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+.btn-outline:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--color-dark), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
 
 /* =====================================================
-   Sections & Titles
-   ===================================================== */
-.section { 
-  padding: var(--space-xl) 2rem; 
-  text-align: center; 
-}
-
-.section:nth-of-type(even) { 
-  background: var(--color-bg); 
-}
-
-#modules > h3 { 
-  margin-bottom: var(--space-md); 
-  font-size: 1.8rem; 
-  color: var(--color-white); 
-  font-weight: bold;
-}
-
-#tutors h3 { 
-  margin-bottom: 0.8rem; 
-  font-size: 2.5rem; 
-  color: var(--color-dark); 
-  font-weight: bold;
-}
-
-#tutors p { 
-  font-size: 1.1rem; 
-  padding-bottom: 1rem;
-}
-
-#faq h3 { 
-  margin-bottom: var(--space-md); 
-  font-size: 1.8rem; 
-  color: var(--color-dark); 
-  font-weight: bold;
+   Sections
+===================================================== */
+.section {
+  padding: var(--space-xl) 2rem;
   text-align: center;
 }
 
-/* section-title: kept as used (module pages override) */
+.section:nth-of-type(even) {
+  background: var(--color-bg);
+}
+
+.section h3 {
+  margin-bottom: var(--space-md);
+  font-size: 2.2rem;
+  color: var(--color-dark);
+}
+
 .section-title {
   position: relative;
-  display: inline-block;
+  display: inline-block;   /* so the background bar fits neatly */
+  font-size: 1.8rem !important;
+  font-weight: bold;
+  color: white !important;
   z-index: 1;
-  width: 100%;
+  width: 100%
 }
 
+/* Thick line behind */
 .section-title::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100vw;
-  height: 60px;
-  background: var(--color-mid);
-  transform: translate(-50%, -50%);
+  height: 60px;       /* thickness of the bar */
+  background: var(--color-mid); /* change to your theme color */
+  transform: translate(-50%, -50%); /* center it on the text */
   z-index: -1;
 }
 
-/* specific override used on module pages */
-.section-title.no-margin { margin-top: 0; }
+
+.section p {
+  max-width: 750px;
+  margin: 0 auto var(--space-md);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
 
 /* =====================================================
-   Cards & Grid System (shared)
-   ===================================================== */
+   Cards (shared styles)
+===================================================== */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -496,150 +409,120 @@ nav a.active::after,
   justify-items: center;
 }
 
-.cards + p { 
-  margin-top: 2rem; 
+.cards + p {
+  margin-top: 2rem; /* add vertical spacing between card grid and button container */
 }
 
-.card, 
-.tutor-card, 
-.subject-card, 
-.contact-card, 
-.resource-card, 
-.pricing-card, 
-.pricing-option, 
-.module-card {
+.cards + p .btn {
+  margin-top: 0; /* reset to avoid double spacing */
+}
+
+
+.card,
+.tutor-card,
+.subject-card,
+.contact-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* general hover lift */
-.card:hover, 
-.subject-card:hover, 
-.module-card:hover, 
-.tutor-card:hover, 
-.pricing-option:hover, 
-.contact-card:hover { 
-  transform: translateY(-5px); 
-  box-shadow: var(--shadow-lg); 
+#contact.section {
+  background: transparent;  /* removes the green behind */
+  box-shadow: none;         /* make sure it’s clean */
 }
 
-.card { 
-  padding: 2rem; 
+.card:hover,
+.subject-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
-.card h4 { 
-  font-size: 20px; 
-  margin-bottom: 0.75rem; 
-  color: var(--color-mid); 
+/* Simple Card */
+.card {
+  padding: 2rem;
 }
 
-/* Tutor card */
+.card h4 {
+  font-size: 20px;
+  margin-bottom: 0.75rem;
+  color: var(--color-mid);
+}
+
+/* Tutor Card */
 .tutor-card {
-  display: flex; 
-  align-items: center; 
-  gap: 2rem; 
-  padding: var(--space-lg); 
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: var(--space-lg);
   min-height: 300px;
-  max-width: 1000px;
 }
 
-.tutor-photo { 
-  flex: 0 0 180px; 
-  height: 180px; 
-  width: 180px; 
+.tutor-photo {
+  flex: 0 0 180px;
+  height: 180px;
+  width: 180px;
   border-radius: 50%;
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  font-weight: bold; 
-  color: var(--color-dark); 
-}
-
-.tutor-photo img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  border-radius: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--color-dark);
 }
 
 .tutor-photo img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* keeps proportions while filling */
+  border-radius: 50%;  /* makes the image round */
 }
 
-.tutor-photo img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.25);
-}
-
-
-.tutor-info { 
-  flex: 1; 
-  text-align: left; 
-}
-
-.tutor-info h4 { 
-  margin-bottom: 0.75rem; 
-  font-size: 1.5rem; 
-  color: var(--color-mid); 
-}
-
-.tutor-info p { 
-  font-size: 1.1rem;
-}
-
-
-/* Module cards (home) */
-.module-cards { 
-  display: inline-grid; 
-  width: 1800px; 
-} /* preserved as original */
-
-.module-card {
-  width: 420px; 
-  min-height: 420px; 
-  padding: 1.5rem; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
+.tutor-info {
+  flex: 1;
   text-align: left;
 }
 
+.tutor-info h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--color-mid);
+}
+
+.module-cards {
+  /* make the container a responsive grid that wraps */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;     /* keeps content constrained on very large screens */
+  margin: 0 auto;        /* center the grid */
+  padding: 0 1rem;       /* small horizontal padding on tiny viewports */
+  box-sizing: border-box;
+}
+
+/* Module Cards (constant-ish card sizing but flexible) */
 .module-card {
-  opacity: 0;
-  transform: translateY(30px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle start */
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
-              box-shadow 0.3s cubic-bezier(0.4,0,0.2,1),
-              opacity 0.6s ease;
+  width: 100%;
+  max-width: 430px;      /* each card won't grow beyond 430px */
+  min-height: 420px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  box-sizing: border-box;
 }
 
-.module-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.module-card.visible:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* end shadow */
-}
-
-/* Hover (no delay override) */
-.module-card:hover {
-  transition-delay: 0s;
-  transform: translateY(-8px);
-}
-
+/* Card Images */
 .module-card .card-img {
   width: 100%;
   height: 150px;
-  object-fit: contain;
+  object-fit: cover;     /* cover usually looks nicer — change to contain if you prefer */
   border-radius: var(--radius-md);
   margin-bottom: 1rem;
 }
 
-
+/* Module Titles */
 .module-card h4 {
   font-size: 1.3rem;
   margin: 0.5rem 0 0.75rem;
@@ -659,31 +542,37 @@ nav a.active::after,
   line-height: 1.4;
 }
 
+
 .module-card .card-btn {
-  align-self: center;
-  margin-top: auto;
+  align-self: center; /* keeps button aligned left */
+  margin-top: auto;       /* ensures it stays at bottom */
 }
 
+
+@media (max-width: 360px) {
+  .module-cards { padding-left: 12px; padding-right: 12px; }
+  .module-card { min-height: 380px; }
+}
 /* =====================================================
-   Two-column layout & tutors section
-   ===================================================== */
+   Two Column Layout
+===================================================== */
 .two-column {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: var(--space-lg);
   align-items: start;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-xl) 2rem;
 }
 
-.two-column .section { 
-  padding: 0; 
-  text-align: left; 
+.two-column .section {
+  padding: 0;
+  text-align: left;
 }
 
-.two-column .tutors-section { 
-  padding: var(--space-lg); 
+.two-column .tutors-section {
+  padding: var(--space-lg); /* restore padding inside tutor section */
 }
 
 .tutors-section {
@@ -692,661 +581,40 @@ nav a.active::after,
   padding: var(--space-lg);
 }
 
-/* =====================================================
-   Forms & Contact elements
-   ===================================================== */
-/* Only the contact page wrapper handles centering */
-.contact-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-bg); /* optional */
-}
-
-/* Your card-like form */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 700px;
-  width: 100%;
-  padding: 2rem;
-  background-color: var(--color-white);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.form-group { 
-  text-align: left; 
-}
-
-.form-group label { 
-  display: block; 
-  margin-bottom: 0.4rem;
+.two-column .tutors-section .cards {
   margin-top: 1rem;
-  font-weight: 600; 
-  color: var(--color-dark); 
 }
 
-.form-group textarea { 
-  resize: vertical; 
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: var(--radius-md);
-  font-size: 1rem;
-  font-family: inherit;
-}
-
-.form-group input:focus, 
-.form-group textarea:focus { 
-  outline: none; 
-  border-color: var(--color-light); 
-  box-shadow: 0 0 0 3px rgba(116,198,157,0.25); 
-}
-
-/* terms: checkbox centered, label under it */
-.terms-container {
-  display: flex;
-  flex-direction: column;   /* stack checkbox above label */
-  align-items: center;      /* center horizontally */
-  justify-content: center;  /* optional: centers vertically inside the container */
-  gap: 0.5rem;
-  color: var(--color-dark);
-  text-align: center;       /* centers multi-line label text */
-  padding: 0.75rem 0;       /* optional spacing */
-}
-
-/* visual checkbox box */
-.terms-container input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 28px;
-  height: 28px;
-  border: 2px solid var(--color-dark);
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative; /* for centered ::after */
-  transition: all 0.15s ease;
-  background: transparent;
-  display: inline-block;
-}
-
-/* hover / focus */
-.terms-container input[type="checkbox"]:hover {
-  border-color: var(--color-mid);
-  background-color: var(--color-lighter);
-}
-.terms-container input[type="checkbox"]:focus {
-  outline: 3px solid rgba(0,120,212,0.12);
-  outline-offset: 2px;
-}
-
-/* centered checkmark inside the box */
-.terms-container input[type="checkbox"]:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 6px;
-  height: 12px;
-  border: solid var(--color-dark);
-  border-width: 0 2px 2px 0;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-/* label: sits below and is clickable (you already have for="terms") */
-.terms-container label {
-  display: block;
-  cursor: pointer;
-  line-height: 1.2;
-  font-size: 0.95rem;
-  max-width: 36ch; /* optional to avoid extremely long lines */
-}
-
-
-/* Contact grid & contact-card */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
-}
-
+/* =====================================================
+   Contact
+===================================================== */
 .contact-card {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 2.5rem 2rem;
-  text-align: center;
-  transition: transform var(--transition), box-shadow var(--transition);
-  display: flex;
-  flex-direction: column;
+  padding: var(--space-lg);
+  text-align: left;
 }
-
 
 .contact-card h3 {
-  font-size: 1.6rem;
-  color: var(--color-mid);
   margin-bottom: 1rem;
+  color: var(--color-dark);
 }
 
 .contact-card p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.contact-card a.btn {
-  margin-top: auto;
-  align-self: center;
-  color: var(--color-white);
-}
-
-/* =====================================================
-   Modal (single consolidated definition)
-   used by leave modal + confirmation popup
-   ===================================================== */
-.modal {
-  display: none; /* toggled via JS */
-  position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  justify-content: center; 
-  align-items: center;
-  z-index: 9999;
-}
-
-.modal-content {
-  background-color: var(--color-white);
-  padding: 2rem; 
-  border-radius: var(--radius-lg); 
-  max-width: 400px; 
-  width: 90%; 
-  text-align: center; 
-  box-shadow: var(--shadow-lg);
-}
-
-.modal-buttons { 
-  display: flex; 
-  justify-content: space-around; 
-  margin-top: 1.5rem; 
-}
-
-/* =====================================================
-   FAQ / Accordion (shared for FAQ, notes, exams)
-   ===================================================== */
-.faq-section {
-  width: 100%;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.faq-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  gap: 1rem;
-}
-
-.faq-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Stack into 1 column on small screens */
-@media (max-width: 768px) {
-  .faq-container {
-    flex-direction: column;
-  }
-}
-
-.faq-answer p {
-  margin: 0 0 2rem 0; /* creates top/bottom breathing room */
-}
-
-
-.faq-question {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: var(--radius-md);
-  background: var(--color-lighter);
-  color: var(--color-dark);
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-transition: background 0.3s ease, color 0.45s ease;
-}
-
-.faq-question:hover {
-  background: var(--color-light);
-  color: var(--color-white);
-}
-
-.faq.active .faq-question {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.faq-answer {
-  font-size: 1.1rem;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, margin 0.3s ease, padding 0.3s ease;
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: 0rem 2rem;
-}
-
-.faq.active .faq-answer {
-  box-shadow: var(--shadow-sm);
-  padding: 1rem 2rem 1.5rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-
-
-.faq-question .icon {
-  transition: transform 0.3s ease;
-  font-size: 1.6rem;
-}
-
-.faq.active .faq-question .icon {
-  transform: rotate(45deg);
-}
-
-
-/* Accordion generic (exams/notes/resources) */
-.accordion-section {
-  width: 100%;
-  max-width: 1000px;
-  margin: 4rem auto 4rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-.accordion-btn,
-.accordion-section .accordion-btn {
-  width: 100%;
-  background: var(--color-mid);
-  color: var(--color-white);
-  padding: 1.5rem;
-  font-size: 1.4rem;
-  text-align: left;
-  border: none;
-  transition: background var(--transition);
-}
-
-.accordion-content {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-light);
-  padding: 1rem;
-  gap: 1rem;
-}
-
-/* exam-item / note-item / resource-item */
-.exam-item,
-.note-item,
-.exam-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--color-white);
-  padding: 1.8rem;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-xs);
-  transition: transform 0.2s, background 0.15s ease, color 0.15s ease;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.note-item {
-  display: block;
-  padding: 0.75rem 1rem;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
-.exam-item:hover,
-.note-item:hover {
-  transform: translateY(-2px);
-  background: var(--color-light);
-  color: var(--color-white);
-}
-
-/* exam-info & exam-img */
-.exam-info h4 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.exam-info p {
-  margin: 0.25rem 0 0;
-  font-size: 0.95rem;
-  color: var(--color-dark);
-}
-
-.exam-img img {
-  width: 100px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-}
-
-/* Responsive stacking for exam items */
-@media (max-width: 768px) {
-  .exam-item {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .exam-img img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* =====================================================
-   Pricing / Plans
-   (kept both pricing-card and pricing-option variations)
-   ===================================================== */
-.pricing-options {
-  background: var(--color-bg);
-  padding: 4rem 2rem;
-}
-
-.pricing-container,
-.pricing-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.pricing-option {
-  flex: 1 1 300px;
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 2rem;
-  text-align: center;
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.pricing-option h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.75rem;
-  color: var(--color-dark);
-}
-
-.pricing-option .price {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 1rem 0 1.5rem;
-  color: var(--color-mid);
-}
-
-.pricing-option ul {
-  margin: 1rem 0 2rem;
-  text-align: center;
-  font-size: 1.05rem;
-  line-height: 2.1;
-  list-style: none;
-  padding: 0;
-}
-
-/* =====================================================
-   About Page / Why Grid / Testimonial
-   ===================================================== */
-.about-container {
-  max-width: 1100px;
-  margin: 4rem auto;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 2rem;
-  padding: 0 1.5rem;
-}
-
-.about-main h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--color-dark);
-  text-align: left;
-}
-
-.about-main p {
   margin-bottom: 1.5rem;
-  line-height: 1.8;
-  text-align: left;
-}
-
-.about-sidebar {
-  background: var(--color-bg);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
-  box-shadow: var(--shadow-sm);
-  align-self: start;
-}
-
-.about-sidebar h4 {
-  margin-bottom: 0.5rem;
-  color: var(--color-mid);
-  font-size: 1.1rem;
-}
-
-.story-list {
-  list-style: disc inside;
-  line-height: 1.8;
-  margin-top: 0.5rem;
-}
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.why-card {
-  background: var(--color-bg);
-  padding: 1.2rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.testimonial {
-  margin-top: 1rem;
-  padding: 1.5rem;
-  background: var(--color-white);
-  border-left: 4px solid var(--color-light);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  font-style: italic;
-}
-/* =====================================================
-   Resources / Notes / Module Pages
-   (module pages share many rules)
-   ===================================================== */
-.notes-section {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 1.5rem;
-  line-height: 1.8;
-}
-
-.module-title {
-  color: var(--color-dark);
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-
-.module-intro {
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  max-width: 750px;
-}
-
-/* mentor-note, outcomes, focus-container, inquiry */
-.mentor-note {
-  background: #fff7e6;
-  padding: 1.5rem 1.8rem;
-  border-left: 4px solid #f4a261;
-  border-radius: var(--radius-md);
-  margin-bottom: 2.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.mentor-note p {
-  margin-bottom: 0.8rem;
   font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-.mentor-note.short-tip {
-  margin-top: 1rem;
-}
-
-.outcomes-container {
-  background: #f2f7ff;
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  margin-bottom: 3rem;
-  border: 4px solid var(--color-mid);
-}
-
-.outcome-box {
-  margin: 1.5rem 0;
-  padding: 1rem 1.2rem;
-  background: #ffffff;
-  border-left: 4px solid var(--color-mid);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.outcome-box p {
-  margin-bottom: 0.6rem;
-  font-size: 1rem;
   line-height: 1.6;
-}
-
-.focus-container {
-  background: #f6faff;
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 3rem;
-}
-
-.focus-container p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-
-/* Content section + glossary sidebar */
-.content-section {
-  position: relative;
-  max-width: 850px;
-  margin: 0 auto 4rem auto;
-}
-
-.glossary {
-  background: #fffdf5;
-  border-left: 4px solid #f4a261;
-  border-radius: var(--radius-md);
-  padding: 1rem 1.2rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  box-shadow: var(--shadow-sm);
-  position: absolute;
-  right: -320px;
-  top: 0;
-  width: 280px;
-}
-
-.glossary h4 {
-  margin: 0 0 0.6rem 0;
-  font-size: 1.05rem;
-  color: var(--color-dark);
-}
-
-.glossary dl dt {
-  font-weight: 700;
-  margin-top: 0.6rem;
-}
-
-.glossary dl dd {
-  margin: 0.2rem 0 0.6rem 0;
-}
-
-/* small-screen: move glossary below */
-@media (max-width: 1200px) {
-  .glossary {
-    position: static;
-    width: auto;
-    margin-top: 2rem;
-  }
-}
-/* =====================================================
-   CTA Section (shared)
-   ===================================================== */
-.cta-section {
-  background: var(--color-lighter);
-  border-radius: 12px;
-  max-width: 800px;
-  margin: 5rem auto 4rem;
-  padding: 4rem 2rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.cta-section h3 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: var(--color-dark);
-}
-
-.cta-section p {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.cta-section .btn {
-  font-size: 1.1rem;
-  padding: 0.9rem 1.8rem;
 }
 
 /* =====================================================
    Footer
-   ===================================================== */
+===================================================== */
+footer {
+  background: var(--color-lighter);
+  color: var(--color-dark);
+  text-align: center;
+  padding: var(--space-md) 2rem;
+  margin-top: var(--space-md);
+}
+
 .footer-nav {
   background: var(--color-dark);
   color: var(--color-white);
@@ -1398,21 +666,708 @@ transition: background 0.3s ease, color 0.45s ease;
   padding: 1rem 2rem;
   font-size: 0.85rem;
 }
-/* =====================================================
-   Page-specific adjustments (kept conservative)
-   ===================================================== */
 
-/* lessons / booking page specifics */
+/* =====================================================
+   Responsive
+===================================================== */
+@media (max-width: 768px) {
+  .nav-center {
+    gap: 1.5rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cards + p .btn {
+  margin-top: var(--space-md);
+  display: inline-block;
+}
+
+
+  .tutor-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tutor-info {
+    text-align: center;
+  }
+
+  .two-column {
+    grid-template-columns: 1fr;
+    padding: var(--space-lg) 1rem;
+  }
+
+  .two-column .section {
+    text-align: center;
+  }
+
+  .subject-card {
+    max-width: 90%;
+  }
+}
+
+
+
+.small-hero {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: linear-gradient(to bottom, rgba(20, 40, 80, 0.7), rgba(20, 40, 80, 0.7)),
+            url("images/biology-bg-small.jpg") center 100% /cover no-repeat;
+  background-attachment: fixed;  /* 🔥 Parallax effect */
+  background-size: cover;
+  color: var(--color-white);
+  border-bottom: 2px solid var(--color-light);
+}
+
+
+.small-hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.small-hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Resource cards */
+.resource-card {
+  text-align: left;
+}
+
+.resource-card h4 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--color-mid); /* replace #2d6a4f */
+}
+
+.resource-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resource-card ul li {
+  margin-bottom: 0.75rem;
+}
+
+.resource-card ul li a {
+  display: inline-block;
+  color: #1b4332;
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.resource-card ul li a:hover {
+  background: var(--color-bg);      /* instead of #e9fcee */
+  color: var(--color-mid);          /* instead of #2d6a4f */
+}
+
+/* Call to action */
+.cta-section {
+  background: var(--color-lighter); /* light neutral instead of green */
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 5rem auto 4rem; /* adds breathing space above */
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.cta-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: var(--color-dark);
+}
+
+.cta-section p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.cta-section .btn {
+  font-size: 1.1rem;
+  padding: 0.9rem 1.8rem;
+}
+
+/* =====================================================
+   Pricing Page
+===================================================== */
+/* Two-card layout fix */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(320px, 1fr)); /* always two cards */
+  justify-content: center;
+  gap: 10px; /* closer but with breathing room */
+  max-width: 500px; /* keeps them centered on screen */
+  margin: 0 auto;
+}
+
+.pricing-card {
+  padding: 3rem; /* larger spacing for bigger feel */
+  min-height: 480px; /* taller for balance */
+  font-size: 1.05rem; /* slightly larger text */
+}
+
+.pricing-card h4 {
+  font-size: 1.8rem; /* bigger plan titles */
+}
+
+.pricing-card .price {
+  font-size: 2.4rem; /* more prominent price */
+}
+
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;            /* space above button */
+  flex-grow: 1;                /* pushes ul to take up space */
+}
+
+.pricing-card ul li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Highlight for most popular */
+.pricing-card.highlight {
+  border: 2px solid var(--color-light);
+  transform: scale(1.05);
+}
+
+/* Ensure buttons align */
+.pricing-card .btn {
+  margin-top: auto;            /* pushes button to bottom */
+  align-self: stretch;         /* make buttons same width */
+  text-align: center;
+}
+
+/* =====================================================
+   Resources Page
+===================================================== */
+.resources-grid .cards {
+  max-width: 1000px;    /* keeps grid centered */
+  margin: 0 auto;       /* centers container */
+  gap: 1rem;            /* reduce spacing between cards */
+}
+
+.resource-card {
+  max-width: 400px;     /* keeps each card at a nice width */
+  width: 100%;
+}
+
+/* =====================================================
+   Contact Page
+===================================================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-light);
+  box-shadow: 0 0 0 3px rgba(116, 198, 157, 0.25);
+}
+
+/* Make Get in Touch box taller, keep text at the top */
+.contact-info {
+  background: var(--color-light) !important;
+  padding: 2rem !important;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: left;
+
+  min-height: 520px;      /* increase vertical height */
+  display: block;         /* remove flex centering */
+}
+
+.contact-info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.contact-info p {
+  margin: 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.contact-info p:last-of-type {
+  border-bottom: none; /* remove line from last item */
+}
+
+.contact-info a {
+  color: var(--color-lighter);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+/* Only allow textarea to expand downwards */
+.form-group textarea {
+  resize: vertical;           /* disable side resizing */
+}
+
+
+
+.contact-info h3,
+.contact-info p,
+.contact-info a {
+  color: var(--color-text);      /* force all text white */
+}
+
+.contact-info a:hover {
+  color: var(--color-white);    /* softer hover highlight */
+}
+
+
+/* =====================================================
+   FAQ Section
+===================================================== */
+.faq-section {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+.faq-section h3 {
+  text-align: center;  /* example */
+  
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition);
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question:hover {
+  background: var(--color-mid);
+  color: var(--color-white);
+}
+
+.faq.active .faq-question {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: var(--color-white);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin 0.3s ease, padding 0.3s ease;
+  background: var(--color-white);   /* white background box */
+  border-radius: var(--radius-md);
+}
+
+.faq.active .faq-answer {
+  box-shadow: var(--shadow-sm);     /* subtle shadow so it feels like a card */
+  padding: 1rem 0 5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.faq-question .icon {
+  transition: transform 0.3s ease;
+}
+
+.faq.active .faq-question .icon {
+  transform: rotate(45deg);
+}
+
+
+/* =====================================================
+   Pricing Page Unique Styles
+===================================================== */
+.hero.pricing-hero {
+  background: linear-gradient(135deg, var(--color-mid), var(--color-light));
+  color: white;
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+.hero.pricing-hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero.pricing-hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Pricing cards unique look */
+.pricing-cards {
+  gap: 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+}
+
+.pricing-card {
+  background: white;
+  border: 2px solid var(--color-lighter);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+
+
+
+.pricing-card h4 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-dark);
+}
+
+.pricing-card .price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 0 1.5rem;
+  color: var(--color-mid);
+}
+
+.pricing-card ul {
+  margin-bottom: 2rem;
+  text-align: left;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.pricing-cta {
+  background: var(--color-mid);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin: 4rem auto;
+  border-radius: var(--radius-lg);
+  max-width: 800px;
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-cta h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.pricing-cta p {
+  margin-bottom: 2rem;
+  font-size: 1.15rem;
+}
+
+.pricing-cta .btn {
+
+
+  font-size: 1.1rem;
+  padding: 0.9rem 2rem;
+
+}
+
+.pricing-cta .btn:hover {
+
+  background-color: var(--color-dark);
+
+}
+
+#tutors {
+  border: 4px solid var(--color-mid);
+}
+
+/* =====================================================
+   About Page
+===================================================== */
+.about-container {
+  max-width: 1100px;
+  margin: 4rem auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+  padding: 0 1.5rem;
+}
+
+.about-main h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-dark);
+  text-align: left;
+}
+
+.about-main p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.about-sidebar {
+  background: var(--color-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+  align-self: start;
+}
+
+.about-sidebar h4 {
+  margin-bottom: 0.5rem;
+  color: var(--color-mid);
+  font-size: 1.1rem;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+  .about-sidebar {
+    margin-top: 2rem;
+  }
+}
+
+.story-list {
+  list-style: disc inside;
+  line-height: 1.8;
+  margin-top: 1rem;
+}
+
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.why-card {
+  background: var(--color-bg);
+  padding: 1.2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+
+.testimonial {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #f8faff;
+  border-left: 4px solid var(--color-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-style: italic;
+}
+
+
+.btn-small {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+
+/* =====================================================
+   Pricing Page (Custom Layout)
+===================================================== */
+
+.pricing-options {
+  background: var(--color-lighter);
+  padding: 4rem 2rem;
+}
+
+.pricing-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pricing-option {
+  flex: 1 1 300px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.pricing-option:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-option .icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.pricing-option h3 {
+  font-size: 1.5rem;
+  color: var(--color-mid);
+  margin-bottom: 0.5rem;
+}
+
+.pricing-option .price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  margin: 1rem 0;
+}
+
+.pricing-option ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+}
+
+.pricing-option ul li {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: var(--color-dark);
+}
+
+.pricing-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+/* =====================================================
+   Book a Lesson Page
+===================================================== */
 body.lesson-page {
   background-color: var(--color-bg);
 }
 
-.contact-form h3 {
-  margin-top: var(--space-md);
+.contact-form {
+  max-width: 600px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
+.contact-form h3 {
+  margin-top: var(--space-md);
+  color: var(--color-dark);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-dark);
+}
+
+/* General form fields */
+.form-group input,
+.form-group textarea {
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-lighter);
+  font-size: 1rem;
+  color: var(--color-text);
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  background: var(--color-white);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 50px;
+}
+
+/* Custom submit button (green) */
+#submit-btn {
+  background: #4CAF50;
+  color: var(--color-white);
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+#submit-btn:hover {
+  background: #338335;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #29692b, 0 12px 20px rgba(0, 0, 0, 0.25);
+}
+#submit-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #29692b, 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Slots */
 .slot {
-  background: var(--color-bg);
+  background: var(--color-white);
   padding: var(--space-sm);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-md);
@@ -1423,80 +1378,427 @@ body.lesson-page {
   gap: 0.5rem;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
 .slot label {
   flex-basis: 100%;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--color-dark);
 }
-
+/* Slot-specific inputs */
 .slot input[type="date"],
 .slot input[type="time"] {
-  flex: 0 0 160px;   /* fixed width instead of flex-grow */
-  max-width: 160px; /* ensures consistency */
+  flex: 1 1 120px;
   padding: var(--space-sm);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-lighter);
   font-size: 1rem;
   font-family: "Segoe UI", "Roboto", sans-serif;
-  background: var(--color-white);
   color: var(--color-text);
+  background: var(--color-white);
 }
 
 .remove-slot {
-  
   background: #e74c3c;
   color: var(--color-white);
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  margin-top: 0.5rem;
   font-size: 0.9rem;
 }
-
-
-
 .remove-slot:hover {
   background: #c0392b;
 }
 
-/* submit button green (kept as-is) */
-#submit-btn {
-  background: #4CAF50;
-  color: var(--color-white);
+/* Add Slot button */
+#add-slot {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin-top: 1.5rem;
-  border-radius: var(--radius-md);
-  font-weight: bold;
-  font-size: 1rem;
-  border: none;
+  margin-bottom: var(--space-md);
+}
+#slots-container {
+  display: flex;  
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Terms checkbox */
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-dark);
+}
+.terms-container input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-dark);
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
-#submit-btn:hover {
-  background: rgb(89, 194, 92);
-  transform: translateY(-6px);
-  box-shadow: 0 6px 0 #29692b, 0 12px 20px rgba(0, 0, 0, 0.25);
+.terms-container input[type="checkbox"]:hover {
+  border-color: var(--color-mid);
+  background-color: var(--color-lighter);
+}
+.terms-container input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 9px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--color-dark);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
-#submit-btn:active {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 0 #29692b, 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* pricing-option smaller tweaks */
-.pricing-img {
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 150px;
-  object-fit: contain;
-  border-radius: var(--radius-md);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-content {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
 }
 
-/* inquiry boxes / highlights */
+/* =====================================================
+   Contact Page
+===================================================== */
+
+/* Remove default button outlines across browsers */
+.btn:focus,
+.btn:active,
+.btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.btn::-moz-focus-inner {
+  border: 0;
+}
+
+/* Contact grid layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.contact-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.contact-card h3 {
+  font-size: 1.6rem;
+  color: var(--color-mid);
+  margin-bottom: 1rem;
+}
+.contact-card p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.contact-card a.btn {
+  margin-top: auto;
+  align-self: center;
+  color: var(--color-white);
+}
+
+/* Contact form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-group {
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-lighter);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  color: var(--color-text);
+  background: var(--color-white);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-light);
+  box-shadow: 0 0 0 3px rgba(116, 198, 157, 0.25);
+}
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Modal (used for leave confirm + confirmation popup) */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-content {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+}
+
+
+/* =====================================================
+   Exams Section (accordion)
+===================================================== */
+.accordion-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.accordion-btn {
+  width: 100%;
+  background: var(--color-mid);
+  color: var(--color-white);
+  padding: 1.5rem 1.5rem;
+  font-size: 1.4rem;
+  text-align: left;
+  border: none;
+  transition: background var(--transition);
+}
+
+.accordion-content {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-light);
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.exam-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-white);
+  padding: 1.8rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.2s, background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.exam-item:hover {
+  transform: translateY(-2px);
+  background: var(--color-light);
+  color: var(--color-white);
+}
+
+.exam-info h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.exam-info p {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-dark);
+}
+
+.exam-img img {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .exam-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exam-img img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* =====================================================
+   Notes Accordion Section
+===================================================== */
+.accordion-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.accordion-btn {
+  width: 100%;
+  background: var(--color-mid);
+  color: var(--color-white);
+  padding: 1.5rem 1.5rem;
+  font-size: 1.4rem;
+  text-align: left;
+  border: none;
+  transition: background var(--transition);
+}
+
+.accordion-content {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-light);
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.note-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 0.5rem;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.note-item:hover {
+  background: var(--color-light);
+  color: var(--color-white);
+}
+
+/* ================================================
+   Module 5 Page Styles (moved from inline <style>)
+================================================= */
+
+/* Section titles - minimalist blue text */
+.section-title {
+  position: relative;
+  display: block;
+  font-size: 1.8rem !important;
+  font-weight: bold;
+  color: var(--color-mid) !important;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Remove ribbon background */
+.section-title::before {
+  content: none;
+}
+
+/* Utility for no top margin on section titles */
+.section-title.no-margin {
+  margin-top: 0;
+}
+
+/* Clean reading layout */
+.notes-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  line-height: 1.8;
+}
+
+.notes-section h2 {
+  margin: 3rem 0 1.5rem;
+  font-size: 2rem;
+  color: var(--color-dark);
+}
+
+.notes-section h3 {
+  margin: 2rem 0 1rem;
+  font-size: 1.6rem;
+  color: var(--color-mid);
+}
+
+.notes-section p,
+.notes-section li {
+  font-size: 1.05rem;
+}
+
+.notes-section ul {
+  margin: 0.5rem 0 1.5rem 1.2rem;
+  list-style: disc;
+}
+
+/* Inquiry callout */
 .inquiry {
   margin: 1rem 0 2rem;
   padding: 1rem 1.2rem;
@@ -1512,19 +1814,107 @@ body.lesson-page {
   color: var(--color-dark);
 }
 
-/* =====================================================
-   Responsive rules (conservative, from original)
-   ===================================================== */
+/* Outcome highlight style */
+.outcomes-container {
+  background: #f2f7ff;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 3rem;
+  border: 4px solid var(--color-mid);
+}
+
+.outcome-box {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  background: #ffffff;
+  border-left: 4px solid var(--color-mid);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.outcome-box p {
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Mentor note style */
+.mentor-note {
+  background: #fff7e6;
+  padding: 1.5rem 1.8rem;
+  border-left: 4px solid #f4a261;
+  border-radius: var(--radius-md);
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mentor-note p {
+  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Specific shorter mentor tip */
+.mentor-note.short-tip {
+  margin-top: 1rem;
+}
+
+/* Shaded containers for Content Focus + Working Scientifically */
+.focus-container {
+  background: #f6faff;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 3rem;
+}
+
+.focus-container p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/* Layout for content + glossary */
+.content-section {
+  position: relative;
+  max-width: 850px;
+  margin: 0 auto 4rem auto;
+}
+
+/* Glossary sidebar */
+.glossary {
+  background: #fffdf5;
+  border-left: 4px solid #f4a261;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: var(--shadow-sm);
+
+  position: absolute;
+  right: -320px;
+  top: 0;
+  width: 280px;
+}
+
+.glossary h4 {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.05rem;
+  color: var(--color-dark);
+}
+
+.glossary dl dt {
+  font-weight: 700;
+  margin-top: 0.6rem;
+}
+
+.glossary dl dd {
+  margin: 0.2rem 0 0.6rem 0;
+}
+
+/* On small screens, drop glossary below */
 @media (max-width: 1200px) {
-  .two-column {
-    grid-template-columns: 1fr;
-    padding: var(--space-lg) 1rem;
-  }
-
-  .two-column .section {
-    text-align: center;
-  }
-
   .glossary {
     position: static;
     width: auto;
@@ -1532,219 +1922,18 @@ body.lesson-page {
   }
 }
 
-@media (max-width: 768px) {
-  .nav-center {
-    gap: 1.5rem;
-    left: auto;
-    transform: none;
-    position: static;
-    justify-content: center;
-  }
-
-  header {
-    height: auto;
-    padding: 0.5rem 0;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .tutor-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .tutor-info {
-    text-align: center;
-  }
-  
-  .two-column {
-    grid-template-columns: 1fr;
-    padding: var(--space-lg) 1rem;
-  }
-
-  .two-column .section {
-    text-align: center;
-  }
-
-  .subject-card {
-    max-width: 90%;
-  }
-
-  .exam-item {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .exam-img img {
-    width: 100%;
-    height: auto;
-  }
-
-  .module-card {
-    width: 100%;
-    min-height: auto;
-  }
-}
-
-
-.lesson-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
+/* Page-specific typography */
+.module-title {
   color: var(--color-dark);
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
 }
 
-
-/* ================================
-   Privacy Policy Page Layout
-   ================================ */
-.layout {
-  display: grid;
-  grid-template-columns: 250px 1fr; /* sidebar + content */
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
-}
-
-.sidebar-title {
+.module-intro {
   font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-mid);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-lighter);
-  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 750px;
 }
 
-/* Sidebar styles */
-.sidebar {
-  background: var(--color-bg);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  align-self: start;
-
-  /* Make sidebar follow screen while scrolling */
-  position: sticky;
-  top: 90px; /* navbar height (70px) + spacing */
-  height: fit-content;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar li {
-  margin-bottom: 0.75rem;
-}
-
-/* Sidebar link styles + hover effect */
-.sidebar a {
-  display: block;
-  position: relative; /* needed for ::before overlay */
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-sm);
-  color: var(--color-dark);
-  font-weight: 500;
-  overflow: hidden; /* contain ::before highlight */
-  transition: 
-    background 0.4s ease,
-    color 0.3s ease,
-    transform 0.3s cubic-bezier(0.25, 1, 0.3, 1),
-    box-shadow 0.3s ease;
-}
-
-.sidebar a::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--color-mid);
-  opacity: 0.15;
-  transition: left 0.4s ease;
-  border-radius: inherit;
-  z-index: -1;
-}
-
-.sidebar a:hover::before {
-  left: 0; /* slide-in highlight effect */
-}
-
-.sidebar a:hover {
-  background: var(--color-lighter);
-  color: var(--color-white);
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-}
-
-/* Content styles */
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.content .card {
-  background: var(--color-white);
-  padding: 2rem 2.5rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  line-height: 1.7;
-  scroll-margin-top: 80px; /* offset for fixed navbar */
-}
-
-.content .card p {
-  margin: 1rem 0 0.8rem;
-}
-
-.content .card ul {
-  list-style: disc outside;
-  padding-left: 1.5rem;
-  margin: 0 0 0.5rem;
-}
-
-.content .card ul li {
-  margin-bottom: 0.3rem;
-  padding-left: 0.3rem;
-}
-
-/* Page title */
-.page-title {
-  margin-top: 70px; /* offset for fixed navbar (70px) + spacing */
-  margin-bottom: 2rem;
-  text-align: center;
-  padding: 2rem 1rem;
-  background: var(--color-mid); /* your brand blue */
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.page-title h1 {
-  font-size: 3.2rem;      /* bigger, feels like a true page title */
-  font-weight: 700;       /* bolder */
-  color: var(--color-white);  /* force white text */
-  margin: 0;
-  text-transform: uppercase;  /* optional, for emphasis */
-  letter-spacing: 1px;    /* optional, for polish */
-}
-
-/* Responsive layout: stack sidebar on top */
-@media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    margin-bottom: 2rem;
-    position: static; /* disable sticky on small screens */
-  }
-}
 
