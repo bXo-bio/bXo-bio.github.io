@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoring | bXo Tutoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      .container {
+        max-width: 700px;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .option-card {
+        background: #fcfcfc;
+        border: 2px solid #222;
+        border-radius: 6px;
+        padding: 40px 30px;
+        text-align: center;
+        text-decoration: none;
+        color: #222;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .option-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .option-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .option-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .option-description {
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #444;
+      }
+
+      .option-image {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .option-image img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      @media (max-width: 600px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .back-link {
+        margin-top: 50px;
+      }
+
+      .icon {
+        transition: transform 0.3s ease;
+      }
+
+      #dim-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0);
+        pointer-events: none;
+        z-index: 1;
+        transition: background 1.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Tutoring Options</h1>
+        <p class="subtitle">Choose the format that works best for you</p>
+      </header>
+      <section class="options">
+        <a href="individual.html" class="option-card nav-button">
+          <div class="option-image">
+            <img src="images/individual.png" class="icon" alt="One-on-One Tutoring">
+          </div>
+          <div class="option-title">One-on-One Tutoring</div>
+          <p class="option-description"> Individual lessons built around how you learn and what you want to improve. </p>
+        </a>
+        <a href="group.html" class="option-card nav-button">
+          <div class="option-image">
+            <img src="images/group.png" class="icon" alt="Group Tutoring">
+          </div>
+          <div class="option-title">Group Tutoring</div>
+          <p class="option-description"> Learn alongside other students, ask questions, and tackle exam problems together. </p>
+        </a>
+      </section>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+  </body>
+</html>

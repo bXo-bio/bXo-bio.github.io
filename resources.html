@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bXo Tutoring | Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      /* ======================
+        Global Scroll Behavior
+      ====================== */
+      html,
+      body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* Hide scrollbar – Firefox */
+        scrollbar-width: none;
+        /* Hide scrollbar – IE / Edge (legacy) */
+        -ms-overflow-style: none;
+      }
+
+      /* Hide scrollbar – Chrome, Safari, iOS */
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* ======================
+        Layout Container
+      ====================== */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* ======================
+        Section
+      ====================== */
+      .section {
+        margin-bottom: 50px;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards;
+      }
+
+      .section:nth-child(3) {
+        animation-delay: 0.1s;
+      }
+
+      .section:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+
+      .section h2 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #222;
+        margin-bottom: 16px;
+      }
+
+      /* ======================
+        Resource Grid
+      ====================== */
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      /* ======================
+        Resource Card
+      ====================== */
+      .resource-card {
+        background-color: #fcfcfc;
+        border: 2px solid #222;
+        border-radius: 6px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .resource-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #222;
+        margin-bottom: 6px;
+      }
+
+      .resource-desc {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 14px;
+        line-height: 1.4;
+      }
+
+      .resource-link {
+        margin-top: auto;
+        align-self: flex-start;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #222;
+        text-decoration: none;
+        border-bottom: 1px solid #222;
+        padding-bottom: 2px;
+        font-family: 'Inter', sans-serif;
+        transition: opacity 0.2s ease;
+      }
+
+      .resource-link:hover {
+        opacity: 0.7;
+      }
+
+      /* ======================
+        Year Toggle System
+      ====================== */
+      .year-wrapper {
+        position: relative;
+        transition: height 0.4s ease;
+      }
+
+      .year-toggle {
+        display: inline-flex;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      /* ======================
+        Year Content
+      ====================== */
+      .year-content {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: auto;
+      }
+
+      .year-content.hidden {
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      /* ======================
+        Year Card Animations
+      ====================== */
+      .year-content .resource-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+
+      .year-content:not(.hidden) .resource-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .year-content:not(.hidden) .resource-card:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+
+      .year-content:not(.hidden) .resource-card:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+
+      .year-content:not(.hidden) .resource-card:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+
+      .year-content:not(.hidden) .resource-card:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+
+      /* ======================
+        Toggle Buttons
+      ====================== */
+      .toggle-btn {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 8px 16px;
+        border: 2px solid #222;
+        border-radius: 6px;
+        background: #fcfcfc;
+        color: #222;
+        cursor: pointer;
+      }
+
+      .toggle-btn:hover {
+        background-color: #f0f0f0;
+      }
+
+      .toggle-btn.active {
+        background: #222;
+        color: #fcfcfc;
+        border-color: #222;
+      }
+
+      .toggle-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(34, 34, 34, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link back-link-top">← Back to home</a>
+      <header>
+        <h1>Biology Resources</h1>
+        <p class="subtitle">Free notes & sample exams</p>
+      </header>
+      <section class="section">
+        <h2>Study Notes</h2>
+        <div class="year-toggle">
+          <button class="toggle-btn active" data-year="11">Year 11</button>
+          <button class="toggle-btn" data-year="12">Year 12</button>
+        </div>
+        <div class="year-wrapper">
+          <div class="year-content" data-year="11">
+            <div class="resource-grid">
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Cells as the Basis of Life</div>
+                  <div class="resource-desc"> Cell structure, membranes, transport, microscopy, and cell specialisation. </div>
+                  <a href="pdfs/y11-cells-basis-of-life-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Cells to Systems</div>
+                  <div class="resource-desc"> Organisation of living things from cells to tissues, organs, and systems. </div>
+                  <a href="pdfs/y11-cells-to-systems-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Evolution &amp; Ecosystems</div>
+                  <div class="resource-desc"> Natural selection, adaptations, population dynamics, and ecosystems. </div>
+                  <a href="pdfs/y11-evolution-ecosystems-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- YEAR 12 -->
+          <div class="year-content hidden" data-year="12">
+            <div class="resource-grid">
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Heredity</div>
+                  <div class="resource-desc"> DNA structure, meiosis, inheritance patterns, and genetic technologies. </div>
+                  <a href="pdfs/y12-heredity-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Diseases</div>
+                  <div class="resource-desc"> Infectious and non-infectious diseases, immune responses, and prevention. </div>
+                  <a href="pdfs/y12-diseases-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Biodiversity</div>
+                  <div class="resource-desc"> Species diversity, ecosystem stability, conservation, and human impacts. </div>
+                  <a href="pdfs/y12-biodiversity-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Biotechnology</div>
+                  <div class="resource-desc"> Genetic engineering, PCR, gene editing, and ethical considerations. </div>
+                  <a href="pdfs/y12-biotechnology-notes.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <h2>Practice Exams</h2>
+        <div class="year-toggle">
+          <button class="toggle-btn active" data-year="11">Year 11</button>
+          <button class="toggle-btn" data-year="12">Year 12</button>
+        </div>
+        <div class="year-wrapper">
+          <div class="year-content" data-year="11">
+            <div class="resource-grid">
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Topic-Based Practice Questions</div>
+                  <div class="resource-desc"> Exam-style multiple-choice and short-answer questions across all Year 11 topics. </div>
+                  <a href="pdfs/y11-topic-practice-questions.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">Full Practice Exam</div>
+                  <div class="resource-desc"> Timed exam covering the full Year 11 NSW Biology syllabus. </div>
+                  <a href="pdfs/y11-full-practice-exam.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="year-content hidden" data-year="12">
+            <div class="resource-grid">
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">HSC-Style Practice Exam</div>
+                  <div class="resource-desc"> Full-length exam with data analysis, extended responses, and mark schemes. </div>
+                  <a href="pdfs/y12-hsc-practice-exam.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+              <div class="hover">
+                <div class="resource-card">
+                  <div class="resource-title">High-Difficulty Exam Pack</div>
+                  <div class="resource-desc"> Challenging questions designed to push Band 6-level responses. </div>
+                  <a href="pdfs/y12-advanced-exam-pack.pdf" class="resource-link" target="_blank"> Download PDF </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+    <script>
+      document.querySelectorAll('.section').forEach(section => {
+        const buttons = section.querySelectorAll('.toggle-btn');
+        const wrapper = section.querySelector('.year-wrapper');
+        const contents = section.querySelectorAll('.year-content');
+        // Set initial wrapper height
+        wrapper.style.height = wrapper.querySelector('.year-content:not(.hidden)').offsetHeight + 'px';
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const year = btn.dataset.year;
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const newContent = Array.from(contents).find(c => c.dataset.year === year);
+            const oldContent = Array.from(contents).find(c => !c.classList.contains('hidden'));
+            if (newContent === oldContent) return;
+            // Fade out old content
+            oldContent.classList.add('hidden');
+            // Update wrapper height to new content
+            wrapper.style.height = newContent.offsetHeight + 'px';
+            // Fade in new content after tiny delay for smoothness
+            setTimeout(() => {
+              newContent.classList.remove('hidden');
+            }, 50); 
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

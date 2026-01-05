@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bXo Tutoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      /* ======================
+           Navigation Grid
+        ====================== */
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .nav-button {
+        border: 2px solid #222;
+        border-radius: 6px;
+        padding: 28px 16px;
+        cursor: pointer;
+        text-decoration: none;
+        opacity: 0;
+        animation: buttonLoadIn 0.5s ease forwards;
+      }
+
+      .nav-button:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .nav-button:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .nav-button:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .nav-button:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .nav-button-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      /* ======================
+           Icons & Labels
+        ====================== */
+      .icon {
+        object-fit: contain;
+      }
+
+      .icon--large {
+        width: 52px;
+        height: 52px;
+      }
+
+      .nav-button h2 {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #222;
+        text-transform: uppercase;
+      }
+
+      /* ======================
+           Responsive
+        ====================== */
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+      }
+
+      /* ======================
+        iPad Optimization
+      ====================== */
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .container {
+          max-width: 720px;
+        }
+
+        .nav-button {
+          padding: 36px 20px;
+        }
+
+        .icon {
+          width: 56px;
+          height: 56px;
+        }
+
+        .icon--large {
+          width: 60px;
+          height: 60px;
+        }
+
+        .nav-button h2 {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>bXo Tutoring</h1>
+        <p class="subtitle">Free Biology Resources</p>
+      </header>
+      <nav class="nav-grid">
+        <a href="resources.html" class="nav-button">
+          <div class="nav-button-inner">
+            <img src="images/resources.png" alt="Resources" class="icon">
+            <h2>Resources</h2>
+          </div>
+        </a>
+        <a href="tutoring.html" class="nav-button">
+          <div class="nav-button-inner">
+            <img src="images/tutoring.png" alt="Tutoring" class="icon icon--large">
+            <h2>Tutoring</h2>
+          </div>
+        </a>
+        <a href="about.html" class="nav-button">
+          <div class="nav-button-inner">
+            <img src="images/about.png" alt="Resources" class="icon">
+            <h2>About Us</h2>
+          </div>
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>

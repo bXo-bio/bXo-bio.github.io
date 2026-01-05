@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-on-One Tutoring | bXo Tutoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/form.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=placeholder"></script>
+  </head>
+  <div class="container">
+    <header>
+      <h1>One-on-One Tutoring</h1>
+      <p class="subtitle">Fill out this quick form to book your session</p>
+    </header>
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">Step 1 of 6</div>
+    </div>
+    <form id="tutoringForm" action="https://formspree.io/f/placeholder" method="POST">
+      <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
+      <div class="card-wrapper">
+        <div class="card active">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. John Doe" autocomplete="name" required>
+        </div>
+      </div>
+      <input type="text" name="_gotcha" style="display:none">
+      <div class="card-wrapper">
+        <div class="card">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="e.g. john@email.com" autocomplete="email" inputmode="email" required>
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card">
+          <label>Grade</label>
+          <div class="grade-buttons">
+            <input type="radio" id="year11" name="grade" value="Year 11" required>
+            <label for="year11">Year 11</label>
+            <input type="radio" id="year12" name="grade" value="Year 12">
+            <label for="year12">Year 12</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card">
+          <label>Preferred Session Format</label>
+          <div class="format-buttons">
+            <input type="radio" id="online" name="sessionFormat" value="Online" required>
+            <label for="online">Online</label>
+            <input type="radio" id="inperson" name="sessionFormat" value="In-Person">
+            <label for="inperson">In-Person</label>
+            <input type="radio" id="hybrid" name="sessionFormat" value="Hybrid">
+            <label for="hybrid">Hybrid</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card availability-card">
+          <label>Availability</label>
+          <p> Select all time ranges you are available for tutoring during the week: </p>
+          <div class="availability-container">
+            <div class="day-selector">
+              <div class="selected-day" id="selectedDay">
+                <span id="currentDay">Monday</span>
+                <button type="button" id="toggleDays">&#9662;</button>
+              </div>
+              <div class="day-list" id="dayList">
+                <div class="day-option" data-day="Monday">Monday</div>
+                <div class="day-option" data-day="Tuesday">Tuesday</div>
+                <div class="day-option" data-day="Wednesday">Wednesday</div>
+                <div class="day-option" data-day="Thursday">Thursday</div>
+                <div class="day-option" data-day="Friday">Friday</div>
+                <div class="day-option" data-day="Saturday">Saturday</div>
+                <div class="day-option" data-day="Sunday">Sunday</div>
+              </div>
+            </div>
+            <div class="time-buttons-container"></div>
+          </div>
+          <div id="availabilitySummary"></div>
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card">
+          <label for="comments">(Optional) Additional Comments / Notes</label>
+          <textarea id="comments" name="comments" rows="4" placeholder="Any special requests or notes for your tutor..."></textarea>
+        </div>
+      </div>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" style="display:none">
+      <div class="buttons" id="formButtons">
+        <button type="button" id="nextBtn">Next</button>
+      </div>
+    </form>
+    <div id="secondaryNav">
+      <a href="tutoring.html" class="back-link">← Back to Tutoring Options</a>
+    </div>
+  </div>
+  <script>
+  /* ================= HELPERS ================= */
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => document.querySelectorAll(s);
+
+  const isValidEmail = email =>
+    /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  /* ================= ELEMENTS ================= */
+
+  const cardWrappers = [...$$('.card-wrapper')];
+  const cards = cardWrappers.map(w => w.querySelector('.card'));
+
+  const nextBtn = $('#nextBtn');
+  const buttons = $('#formButtons');
+  const secondaryNav = $('#secondaryNav');
+  const form = $('#tutoringForm');
+  const progressFill = $('#progressFill');
+  const progressText = $('#progressText');
+
+  let index = 0;
+  let submitting = false;
+
+  /* ================= INIT ================= */
+
+  cardWrappers.forEach(w => {
+    w.classList.remove('active', 'animate-in');
+  });
+
+  const firstWrapper = cardWrappers[0];
+  firstWrapper.classList.add('active');
+
+  // force reflow so animation triggers
+  void firstWrapper.offsetWidth;
+
+  firstWrapper.classList.add('animate-in');
+
+
+
+  /* ================= UI ================= */
+
+  function updateButtons() {
+    nextBtn.textContent =
+      index === cards.length - 1 ? 'Submit' : 'Next';
+
+    if (index === cards.length - 1) {
+      document.body.classList.add('final-step');
+    }
+  }
+
+  function updateProgress() {
+    const total = cards.length;
+  const percent = (index  / total) * 100;
+
+    progressFill.style.width = `${percent}%`;
+    progressText.textContent = `Step ${Math.min(index + 1, total)} of ${total}`;
+  }
+
+  updateButtons();
+  updateProgress();
+
+  /* ================= VALIDATION ================= */
+
+  function showError(container, message) {
+    let error = container.querySelector('.error-message');
+    if (!error) {
+      error = document.createElement('div');
+      error.className = 'error-message';
+      container.appendChild(error);
+    }
+    error.textContent = message;
+  }
+
+  function validateCard(card) {
+    let valid = true;
+    card.classList.remove('invalid');
+    card.removeAttribute('aria-invalid');
+
+    card.querySelector('.error-message')?.remove();
+
+    const textInputs = card.querySelectorAll('input[type="text"], input[type="email"]');
+    textInputs.forEach(input => {
+      if (!input.value.trim()) {
+        valid = false;
+        showError(card, 'This field is required.');
+      } else if (input.type === 'email' && !isValidEmail(input.value)) {
+        valid = false;
+        showError(card, 'Please enter a valid email address.');
+      }
+    });
+
+    const radios = [...card.querySelectorAll('input[type="radio"]')];
+    if (radios.length && !radios.some(r => r.checked)) {
+      valid = false;
+      showError(card, 'Please select an option.');
+    }
+
+    if (card.classList.contains('availability-card')) {
+      const checks = [...card.querySelectorAll('input[type="checkbox"]')];
+      if (!checks.some(c => c.checked)) {
+        valid = false;
+        showError(card, 'Please select at least one time slot.');
+      }
+    }
+
+  if (!valid) {
+    card.classList.add('invalid');
+    card.setAttribute('aria-invalid', 'true');
+    shakeCard(card);
+  }
+
+  return valid;
+
+  }
+
+  function shakeCard(card) {
+    card.classList.remove('shake');
+    void card.offsetWidth; // force reflow
+    card.classList.add('shake');
+  }
+
+
+  /* ================= NAV ================= */
+
+  function scrollToCard(card) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+
+        const offset = cardCenter - viewportCenter;
+
+        window.scrollTo({
+          top: window.scrollY + offset,
+          behavior: 'smooth'
+        });
+      });
+    });
+  }
+
+  function next() {
+    let allValid = true;
+
+    // Validate ALL cards up to the current one
+    for (let i = 0; i <= index; i++) {
+      const valid = validateCard(cards[i]);
+      if (!valid) allValid = false;
+    }
+
+    if (!allValid) {
+      // Scroll to the first invalid card
+      const firstInvalid = document.querySelector('.card.invalid');
+      if (firstInvalid) scrollToCard(firstInvalid);
+      return;
+    }
+
+    if (index === cards.length - 1) {
+      submitWithRecaptcha();
+      return;
+    }
+
+    index++;
+    updateProgress();
+    updateButtons();
+  const wrapper = cardWrappers[index];
+  const card = cards[index];
+  wrapper.classList.add('active');
+  card.classList.add('active');
+
+
+  // force reflow so animation always plays
+  void wrapper.offsetWidth;
+
+  wrapper.classList.add('animate-in');
+
+  scrollToCard(card);
+
+  }
+
+
+  nextBtn.addEventListener('click', next);
+
+  /* ================= ENTER KEY ================= */
+
+  form.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !(e.target.tagName === 'TEXTAREA' && e.shiftKey)) {
+      e.preventDefault();
+      next();
+    }
+  });
+
+  /* ================= AVAILABILITY ================= */
+
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const timeSlots = [
+    ['3pm','4pm'], ['4pm','5pm'], ['5pm','6pm'],
+    ['6pm','7pm'], ['7pm','8pm'], ['8pm','9pm']
+  ];
+
+  const container = $('.time-buttons-container');
+
+  days.forEach(day => {
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'time-buttons day-times';
+    dayDiv.dataset.day = day;
+
+    timeSlots.forEach(([start, end]) => {
+      const id = `${day}-${start}-${end}`.replace(/[^a-z0-9]/gi, '');
+
+      dayDiv.insertAdjacentHTML('beforeend', `
+        <input type="checkbox" id="${id}" name="availability[]" value="${day} ${start}-${end}">
+        <label for="${id}">${start} - ${end}</label>
+      `);
+    });
+
+    container.appendChild(dayDiv);
+  });
+
+  /* ================= DAY SELECTOR ================= */
+
+  const currentDay = $('#currentDay');
+  const dayList = $('#dayList');
+  const dayTimes = $$('.day-times');
+
+  dayTimes.forEach(d => d.classList.toggle('active', d.dataset.day === 'Monday'));
+
+  const selectedDay = $('#selectedDay');
+
+  selectedDay.onclick = e => {
+    e.stopPropagation();
+    dayList.style.display =
+      dayList.style.display === 'block' ? 'none' : 'block';
+  };
+
+
+  $$('.day-option').forEach(opt => {
+    opt.tabIndex = 0;
+    opt.onclick = () => {
+      currentDay.textContent = opt.dataset.day;
+      dayTimes.forEach(d =>
+        d.classList.toggle('active', d.dataset.day === opt.dataset.day)
+      );
+      dayList.style.display = 'none';
+    };
+  });
+
+  /* ================= SUMMARY ================= */
+
+  const summary = $('#availabilitySummary');
+  const availabilityInputs = $$('input[name="availability[]"]');
+
+  function updateSummary() {
+    const map = {};
+
+    availabilityInputs.forEach(cb => {
+      if (cb.checked) {
+        const [day, time] = cb.value.split(' ', 2);
+        (map[day] ||= []).push(time);
+      }
+    });
+
+    summary.innerHTML = Object.keys(map).length
+      ? days.filter(d => map[d]).map(d => `
+          <div class="summary-line">
+            <span class="day-name">${d}:</span>
+            <span>${map[d].join(', ')}</span>
+          </div>
+        `).join('')
+      : '<div>No times selected yet.</div>';
+  }
+
+  availabilityInputs.forEach(cb =>
+    cb.addEventListener('change', updateSummary)
+  );
+
+  updateSummary();
+
+  /* ================= RECAPTCHA ================= */
+
+  function submitWithRecaptcha() {
+    if (submitting) return;
+    submitting = true;
+    nextBtn.disabled = true;
+
+    grecaptcha.ready(() => {
+      grecaptcha.execute('placeholder', { action:'submit' })
+        .then(token => {
+          $('#recaptchaToken').value = token;
+          form.submit();
+        }); 
+    });
+  }
+  </script>
+</body>
+</html>
