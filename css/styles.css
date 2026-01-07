@@ -1,43 +1,61 @@
 /* =========================
-   Reset
+   CSS RESET
 ========================= */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 /* =========================
-   Body base
+   ROOT / BASE
 ========================= */
 body {
   font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, sans-serif;
   background: #f5f5f5;
+  color: #444;
+  line-height: 1.6;
+
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   padding: 40px 20px;
+
+  position: relative;
 }
 
 /* =========================
-   Background grid
+   BACKGROUND GRID
 ========================= */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
+
   opacity: 0.07;
-  background-image: linear-gradient(#222 1px, transparent 1px),
+  background-image:
+    linear-gradient(#222 1px, transparent 1px),
     linear-gradient(90deg, #222 1px, transparent 1px);
   background-size: 60px 60px;
+
   animation: moveGrid 12s linear infinite;
 }
 
-/* grid spacing larger on bigger screens */
+/* Retina grid lines */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body::before {
+    background-image:
+      linear-gradient(#222 2px, transparent 2px),
+      linear-gradient(90deg, #222 2px, transparent 2px);
+  }
+}
+
+/* Larger grid on smaller screens */
 @media (max-width: 1024px) {
   body::before {
     background-size: 80px 80px;
@@ -45,78 +63,23 @@ body::before {
   }
 }
 
-/* thicker lines for retina devices */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  body::before {
-    background-image: linear-gradient(#222 2px, transparent 2px),
-      linear-gradient(90deg, #222 2px, transparent 2px);
-  }
-}
-
 /* =========================
-   Containers
-========================= */
-.container {
-  width: 100%;
-  max-width: min(500px, 100%);
-  z-index: 1;
-}
-
-.container--wide {
-  max-width: 900px;
-  margin: auto;
-  position: relative;
-}
-
-/* =========================
-   Header
-========================= */
-header {
-  text-align: center;
-  margin-bottom: 40px;
-  animation: fadeIn 0.6s ease forwards;
-}
-
-/* =========================
-   Typography
-========================= */
-h1 {
-  font-weight: 400;
-  color: #222;
-  margin-bottom: 10px;
-}
-
-.subtitle {
-  font-size: 1rem;
-  font-weight: 300;
-  color: #666;
-}
-
-input,
-textarea {
-  font-family: "Space Grotesk", sans-serif;
-}
-
-/* =========================
-   Typography System
+   TYPOGRAPHY SYSTEM
 ========================= */
 
 /* Base text */
-body,
-p {
-  font-family: "Space Grotesk", sans-serif;
+p,
+body {
   font-weight: 300;
-  color: #444;
-  line-height: 1.6;
 }
 
 /* Page titles */
 h1 {
-  font-family: "Space Grotesk", sans-serif;
   font-weight: 400;
+  color: #222;
 }
 
-/* Section labels / UI headings */
+/* UI labels / controls */
 h2,
 .option-title,
 .member-name,
@@ -128,8 +91,44 @@ button,
   text-transform: uppercase;
 }
 
+/* Inputs */
+input,
+textarea {
+  font-family: "Space Grotesk", sans-serif;
+}
+
 /* =========================
-   Back link
+   LAYOUT CONTAINERS
+========================= */
+.container {
+  width: 100%;
+  max-width: 500px;
+  z-index: 1;
+}
+
+.container--wide {
+  max-width: 900px;
+  margin: auto;
+  position: relative;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #666;
+}
+
+/* =========================
+   NAV / LINKS
 ========================= */
 .back-link {
   position: relative;
@@ -148,9 +147,10 @@ button,
   width: 100%;
   height: 1px;
   background: #444;
+
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.25s ease 0.05s, opacity 0.25s ease 0.05s;
+  transition: transform 0.25s ease 0.05s;
 }
 
 .back-link:hover {
@@ -161,9 +161,7 @@ button,
   transform: scaleX(1);
 }
 
-/* =========================
-   Back link (responsive)
-========================= */
+/* Mobile back link */
 .back-link-top {
   display: none;
 }
@@ -176,12 +174,52 @@ button,
 }
 
 /* =========================
-   Animations
+   BUTTONS
+========================= */
+.nav-button {
+  background: #fcfcfc;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-button:hover {
+  background: #f0f0f0;
+}
+
+.nav-button:hover .icon {
+  transform: scale(1.1);
+}
+
+/* =========================
+   HOVER UTILITIES
+========================= */
+.hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   ANIMATIONS
 ========================= */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -197,56 +235,3 @@ button,
     background-position: 60px 60px, 60px 60px;
   }
 }
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes buttonLoadIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.nav-button {
-  background: #fcfcfc;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.nav-button:hover {
-  background: #f0f0f0;
-}
-.icon {
-  width: 48px;
-  height: 48px;
-  transition: transform 0.3s ease;
-}
-
-.nav-button:hover .icon {
-  transform: scale(1.1);
-}
-
-/* wrapper hover effect */
-.hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform, box-shadow;
-}
-
-/* lift + shadow on hover */
-.hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
