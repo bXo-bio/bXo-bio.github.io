@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/form.css">
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdgzkEsAAAAAEEyaYO85xvMnOlTjoOpBPWStC8J"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdVB1QsAAAAAPy1d_7Z-j8Iej3arnan-SpJ8GcT"></script>
   </head>
   <body>
     <div class="container">
@@ -23,7 +23,7 @@
         </div>
         <div class="progress-text" id="progressText">Step 1 of 6</div>
       </div>
-      <form id="tutoringForm" action="https://formspree.io/f/xrebqjpq" method="POST">
+      <form id="tutoringForm" action="https://formspree.io/f/mlgjnbrq" method="POST">
         <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
         <div class="card-wrapper">
           <div class="card active">
@@ -399,7 +399,7 @@
 
       grecaptcha.ready(() => {
         grecaptcha
-          .execute('6LdgzkEsAAAAAEEyaYO85xvMnOlTjoOpBPWStC8J', { action: 'submit' })
+          .execute('6LdVB1QsAAAAAPy1d_7Z-j8Iej3arnan-SpJ8GcT', { action: 'submit' })
           .then(token => {
             document.getElementById('recaptchaToken').value = token;
             form.submit();
