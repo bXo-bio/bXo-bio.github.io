@@ -40,6 +40,19 @@
         </div>
         <div class="card-wrapper">
           <div class="card">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="e.g. 0412 345 678"
+              autocomplete="tel"
+              required
+            >
+          </div>
+        </div>   
+        <div class="card-wrapper">
+          <div class="card">
             <label>Grade</label>
             <div class="grade-buttons">
               <input type="radio" id="year11" name="grade" value="Year 11" required>
@@ -65,7 +78,7 @@
         <div class="card-wrapper">
           <div class="card availability-card">
             <label>Availability</label>
-            <p> Select all time ranges you are available for tutoring during the week: </p>
+            <p> Select all time ranges that you are available within for tutoring during the week: </p>
             <div class="availability-container">
               <div class="day-selector">
                 <div class="selected-day" id="selectedDay">
@@ -107,6 +120,9 @@
 
     const $ = s => document.querySelector(s);
     const $$ = s => document.querySelectorAll(s);
+
+    const isValidPhone = phone =>
+    /^[0-9+\s()-]{8,}$/.test(phone);
 
     const isValidEmail = email =>
       /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
@@ -183,7 +199,10 @@
 
       card.querySelector('.error-message')?.remove();
 
-      const textInputs = card.querySelectorAll('input[type="text"], input[type="email"]');
+    const textInputs = card.querySelectorAll(
+      'input[type="text"], input[type="email"], input[type="tel"]'
+    );
+
       textInputs.forEach(input => {
         if (!input.value.trim()) {
           valid = false;
@@ -191,6 +210,9 @@
         } else if (input.type === 'email' && !isValidEmail(input.value)) {
           valid = false;
           showError(card, 'Please enter a valid email address.');
+        } else if (input.type === 'tel' && !isValidPhone(input.value)) {
+          valid = false;
+          showError(card, 'Please enter a valid phone number.');
         }
       });
 
