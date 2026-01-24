@@ -123,351 +123,374 @@
       </div>
     </div>
     <script>
-    /* ================= HELPERS ================= */
+      /* ================= HELPERS ================= */
 
-    const $ = s => document.querySelector(s);
-    const $$ = s => document.querySelectorAll(s);
+      const $ = s => document.querySelector(s);
+      const $$ = s => document.querySelectorAll(s);
 
-    const isValidPhone = phone =>
-    /^[0-9+\s()-]{8,}$/.test(phone);
+      const isValidPhone = phone =>
+      /^[0-9+\s()-]{8,}$/.test(phone);
 
-    const isValidEmail = email =>
-      /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+      const isValidEmail = email =>
+        /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 
-    /* ================= ELEMENTS ================= */
+      /* ================= ELEMENTS ================= */
 
-    const cardWrappers = [...$$('.card-wrapper')];
-    const cards = cardWrappers.map(w => w.querySelector('.card'));
+      const cardWrappers = [...$$('.card-wrapper')];
+      const cards = cardWrappers.map(w => w.querySelector('.card'));
 
-    const nextBtn = $('#nextBtn');
-    const buttons = $('#formButtons');
-    const secondaryNav = $('#secondaryNav');
-    const form = $('#tutoringForm');
-    const progressFill = $('#progressFill');
-    const progressText = $('#progressText');
+      const nextBtn = $('#nextBtn');
+      const buttons = $('#formButtons');
+      const secondaryNav = $('#secondaryNav');
+      const form = $('#tutoringForm');
+      const progressFill = $('#progressFill');
+      const progressText = $('#progressText');
 
-    let index = 0;
-    let submitting = false;
+      let index = 0;
+      let submitting = false;
 
-    /* ================= INIT ================= */
+      /* ================= INIT ================= */
 
-    cardWrappers.forEach(w => {
-      w.classList.remove('active', 'animate-in');
-    });
-
-    const firstWrapper = cardWrappers[0];
-    firstWrapper.classList.add('active');
-
-    // force reflow so animation triggers
-    void firstWrapper.offsetWidth;
-
-    firstWrapper.classList.add('animate-in');
-
-
-
-    /* ================= UI ================= */
-
-    function updateButtons() {
-      nextBtn.textContent =
-        index === cards.length - 1 ? 'Submit' : 'Next';
-
-      if (index === cards.length - 1) {
-        document.body.classList.add('final-step');
-      }
-    }
-
-    function updateProgress() {
-      const total = cards.length;
-    const percent = (index  / total) * 100;
-
-      progressFill.style.width = `${percent}%`;
-      progressText.textContent = `Step ${Math.min(index + 1, total)} of ${total}`;
-    }
-
-    updateButtons();
-    updateProgress();
-
-    /* ================= VALIDATION ================= */
-
-    function showError(container, message) {
-      let error = container.querySelector('.error-message');
-      if (!error) {
-        error = document.createElement('div');
-        error.className = 'error-message';
-        container.appendChild(error);
-      }
-      error.textContent = message;
-    }
-
-    function validateCard(card) {
-      let valid = true;
-      card.classList.remove('invalid');
-      card.removeAttribute('aria-invalid');
-
-      card.querySelector('.error-message')?.remove();
-
-    const textInputs = card.querySelectorAll(
-      'input[type="text"], input[type="email"], input[type="tel"]'
-    );
-    
-    textInputs.forEach(input => {
-      if (!input.value.trim()) {
-        valid = false;
-        showError(card, 'This field is required.');
-      } else if (input.type === 'email' && !isValidEmail(input.value)) {
-        valid = false;
-        showError(card, 'Please enter a valid email address.');
-      } else if (input.type === 'tel' && !isValidPhone(input.value)) {
-        valid = false;
-        showError(card, 'Please enter a valid phone number.');
-      }
-    });
-
-    const radios = [...card.querySelectorAll('input[type="radio"]')];
-    if (radios.length && !radios.some(r => r.checked)) {
-      valid = false;
-      showError(card, 'Please select an option.');
-    }
-
-    if (card.classList.contains('availability-card')) {
-      const checks = [...card.querySelectorAll('input[type="checkbox"]')];
-      if (!checks.some(c => c.checked)) {
-        valid = false;
-        showError(card, 'Please select at least one time slot.');
-      }
-    }
-
-    if (!valid) {
-      card.classList.add('invalid');
-      card.setAttribute('aria-invalid', 'true');
-      shakeCard(card);
-    }
-
-    return valid;
-
-    }
-
-    function shakeCard(card) {
-      card.classList.remove('shake');
-      void card.offsetWidth; // force reflow
-      card.classList.add('shake');
-    }
-
-
-    /* ================= NAV ================= */
-
-    function scrollToCard(card) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          const cardCenter = rect.top + rect.height / 2;
-          const viewportCenter = window.innerHeight / 2;
-
-          const offset = cardCenter - viewportCenter;
-
-          window.scrollTo({
-            top: window.scrollY + offset,
-            behavior: 'smooth'
-          });
-        });
+      cardWrappers.forEach(w => {
+        w.classList.remove('active', 'animate-in');
       });
-    }
 
-    function next() {
-      let allValid = true;
+      const firstWrapper = cardWrappers[0];
+      firstWrapper.classList.add('active');
 
-      // Validate ALL cards up to the current one
-      for (let i = 0; i <= index; i++) {
-        const valid = validateCard(cards[i]);
-        if (!valid) allValid = false;
+      // force reflow so animation triggers
+      void firstWrapper.offsetWidth;
+
+      firstWrapper.classList.add('animate-in');
+
+
+
+      /* ================= UI ================= */
+
+      function updateButtons() {
+        nextBtn.textContent =
+          index === cards.length - 1 ? 'Submit' : 'Next';
+
+        if (index === cards.length - 1) {
+          document.body.classList.add('final-step');
+        }
       }
 
-      if (!allValid) {
-        // Scroll to the first invalid card
-        const firstInvalid = document.querySelector('.card.invalid');
-        if (firstInvalid) scrollToCard(firstInvalid);
-        return;
+      function updateProgress() {
+        const total = cards.length;
+      const percent = (index  / total) * 100;
+
+        progressFill.style.width = `${percent}%`;
+        progressText.textContent = `Step ${Math.min(index + 1, total)} of ${total}`;
       }
 
-      if (index === cards.length - 1) {
-        submitWithRecaptcha();
-        return;
-      }
-
-      index++;
-      updateProgress();
       updateButtons();
+      updateProgress();
 
-      const wrapper = cardWrappers[index];
-      const card = cards[index];
-      wrapper.classList.add('active');
-      card.classList.add('active');
+      /* ================= VALIDATION ================= */
 
-
-      // force reflow so animation always plays
-      void wrapper.offsetWidth;
-
-      wrapper.classList.add('animate-in');
-
-      scrollToCard(card);
-
-    }
-
-
-    nextBtn.addEventListener('click', next);
-
-    /* ================= ENTER KEY ================= */
-
-    form.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && !(e.target.tagName === 'TEXTAREA' && e.shiftKey)) {
-        e.preventDefault();
-        next();
+      function showError(container, message) {
+        let error = container.querySelector('.error-message');
+        if (!error) {
+          error = document.createElement('div');
+          error.className = 'error-message';
+          container.appendChild(error);
+        }
+        error.textContent = message;
       }
-    });
 
-    /* ================= AVAILABILITY ================= */
+      function validateCard(card) {
+        let valid = true;
+        card.classList.remove('invalid');
+        card.removeAttribute('aria-invalid');
 
-    const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-    const timePeriods = ['Morning', 'Afternoon', 'Night'];
-    const container = $('.time-buttons-container');
+        card.querySelector('.error-message')?.remove();
 
-    days.forEach(day => {
-      const dayDiv = document.createElement('div');
-      dayDiv.className = 'time-buttons day-times';
-      dayDiv.dataset.day = day;
-
-      timePeriods.forEach(period => {
-        const id = `${day}-${period}`.replace(/[^a-z0-9]/gi, '');
-
-        dayDiv.insertAdjacentHTML('beforeend', `
-          <input
-            type="checkbox"
-            id="${id}"
-            name="availability[]"
-            value="${day} ${period}"
-          >
-          <label for="${id}">${period}</label>
-        `);
-      });
-
-      container.appendChild(dayDiv);
-    });
-
-
-    /* ================= DAY SELECTOR ================= */
-
-    const currentDay = $('#currentDay');
-    const dayList = $('#dayList');
-    const dayTimes = $$('.day-times');
-
-    dayTimes.forEach(d => d.classList.toggle('active', d.dataset.day === 'Monday'));
-
-    const selectedDay = $('#selectedDay');
-
-    selectedDay.onclick = e => {
-      e.stopPropagation();
-      dayList.style.display =
-        dayList.style.display === 'block' ? 'none' : 'block';
-    };
-
-
-    $$('.day-option').forEach(opt => {
-      opt.tabIndex = 0;
-      opt.onclick = () => {
-        currentDay.textContent = opt.dataset.day;
-        dayTimes.forEach(d =>
-          d.classList.toggle('active', d.dataset.day === opt.dataset.day)
-        );
-        dayList.style.display = 'none';
-      };
-    });
-
-    /* ================= SUMMARY ================= */
-
-    const summary = $('#availabilitySummary');
-    const availabilityInputs = $$('input[name="availability[]"]');
-
-    function updateSummary() {
-      const map = {};
-
-      availabilityInputs.forEach(cb => {
-        if (cb.checked) {
-          const [day, time] = cb.value.split(' ', 2);
-          (map[day] ||= []).push(time);
+      const textInputs = card.querySelectorAll(
+        'input[type="text"], input[type="email"], input[type="tel"]'
+      );
+      
+      textInputs.forEach(input => {
+        if (!input.value.trim()) {
+          valid = false;
+          showError(card, 'This field is required.');
+        } else if (input.type === 'email' && !isValidEmail(input.value)) {
+          valid = false;
+          showError(card, 'Please enter a valid email address.');
+        } else if (input.type === 'tel' && !isValidPhone(input.value)) {
+          valid = false;
+          showError(card, 'Please enter a valid phone number.');
         }
       });
 
-      summary.innerHTML = Object.keys(map).length
-        ? days.filter(d => map[d]).map(d => `
-            <div class="summary-line">
-              <span class="day-name">${d}:</span>
-              <span>${map[d].join(', ')}</span>
-            </div>
-          `).join('')
-        : '<div>No times selected yet.</div>';
-    }
-
-    availabilityInputs.forEach(cb =>
-      cb.addEventListener('change', updateSummary)
-    );
-
-    updateSummary();
-
-      /* ================= RECAPTCHA ================= */
-
-    function submitWithRecaptcha() {
-      if (submitting) return;
-
-      submitting = true;
-      nextBtn.disabled = true;
-
-      if (!window.grecaptcha) {
-        console.error('reCAPTCHA not loaded');
-        submitting = false;
-        nextBtn.disabled = false;
-        return;
+      const radios = [...card.querySelectorAll('input[type="radio"]')];
+      if (radios.length && !radios.some(r => r.checked)) {
+        valid = false;
+        showError(card, 'Please select an option.');
       }
 
-      grecaptcha.ready(() => {
-        grecaptcha
-          .execute('6LdVB1QsAAAAAPy1d_7Z-j8Iej3arnan-SpJ8GcT', { action: 'submit' })
-          .then(token => {
-            document.getElementById('recaptchaToken').value = token;
-            form.submit();
-          })
-          .catch(err => {
-            console.error('reCAPTCHA execution failed', err);
-            submitting = false;
-            nextBtn.disabled = false;
+      if (card.classList.contains('availability-card')) {
+        const checks = [...card.querySelectorAll('input[type="checkbox"]')];
+        if (!checks.some(c => c.checked)) {
+          valid = false;
+          showError(card, 'Please select at least one time slot.');
+        }
+      }
+
+      if (!valid) {
+        card.classList.add('invalid');
+        card.setAttribute('aria-invalid', 'true');
+        shakeCard(card);
+      }
+
+      return valid;
+
+      }
+
+      function shakeCard(card) {
+        card.classList.remove('shake');
+        void card.offsetWidth; // force reflow
+        card.classList.add('shake');
+      }
+
+
+      /* ================= NAV ================= */
+
+      function scrollToCard(card) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.top + rect.height / 2;
+            const viewportCenter = window.innerHeight / 2;
+
+            const offset = cardCenter - viewportCenter;
+
+            window.scrollTo({
+              top: window.scrollY + offset,
+              behavior: 'smooth'
+            });
           });
-      });
-    }
-
-    /* =============== LEAVE CONFIRMATION ================ */
-    let formSubmitted = false;
-    let formTouched = false;
-
-    // Mark form as submitted
-    form.addEventListener('submit', () => {
-      formSubmitted = true;
-    });
-
-    // Detect any user interaction with the form
-    form.addEventListener('input', () => {
-      formTouched = true;
-    });
-
-    form.addEventListener('change', () => {
-      formTouched = true;
-    });
-
-    // Warn before leaving page
-    window.addEventListener('beforeunload', e => {
-      if (!formSubmitted && formTouched) {
-        e.preventDefault();
-        e.returnValue = '';
+        });
       }
-    });
+
+      function next() {
+        let allValid = true;
+
+        // Validate ALL cards up to the current one
+        for (let i = 0; i <= index; i++) {
+          const valid = validateCard(cards[i]);
+          if (!valid) allValid = false;
+        }
+
+        if (!allValid) {
+          // Scroll to the first invalid card
+          const firstInvalid = document.querySelector('.card.invalid');
+          if (firstInvalid) scrollToCard(firstInvalid);
+          return;
+        }
+
+        if (index === cards.length - 1) {
+          submitWithRecaptcha();
+          return;
+        }
+
+        index++;
+        updateProgress();
+        updateButtons();
+
+        const wrapper = cardWrappers[index];
+        const card = cards[index];
+        wrapper.classList.add('active');
+        card.classList.add('active');
+
+
+        // force reflow so animation always plays
+        void wrapper.offsetWidth;
+
+        wrapper.classList.add('animate-in');
+
+        scrollToCard(card);
+
+      }
+
+
+      nextBtn.addEventListener('click', next);
+
+      /* ================= ENTER KEY ================= */
+
+      form.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !(e.target.tagName === 'TEXTAREA' && e.shiftKey)) {
+          e.preventDefault();
+          next();
+        }
+      });
+
+      /* ================= AVAILABILITY ================= */
+
+      const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+      const timePeriods = ['Morning', 'Afternoon', 'Night'];
+      const container = $('.time-buttons-container');
+
+      days.forEach(day => {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'time-buttons day-times';
+        dayDiv.dataset.day = day;
+
+        timePeriods.forEach(period => {
+          const id = `${day}-${period}`.replace(/[^a-z0-9]/gi, '');
+
+          dayDiv.insertAdjacentHTML('beforeend', `
+            <input
+              type="checkbox"
+              id="${id}"
+              name="availability[]"
+              value="${day} ${period}"
+            >
+            <label for="${id}">${period}</label>
+          `);
+        });
+
+        container.appendChild(dayDiv);
+      });
+
+
+      /* ================= DAY SELECTOR ================= */
+
+      const currentDay = $('#currentDay');
+      const dayList = $('#dayList');
+      const dayTimes = $$('.day-times');
+
+      dayTimes.forEach(d => d.classList.toggle('active', d.dataset.day === 'Monday'));
+
+      const selectedDay = $('#selectedDay');
+
+      selectedDay.onclick = e => {
+        e.stopPropagation();
+        dayList.style.display =
+          dayList.style.display === 'block' ? 'none' : 'block';
+      };
+
+
+      $$('.day-option').forEach(opt => {
+        opt.tabIndex = 0;
+        opt.onclick = () => {
+          currentDay.textContent = opt.dataset.day;
+          dayTimes.forEach(d =>
+            d.classList.toggle('active', d.dataset.day === opt.dataset.day)
+          );
+          dayList.style.display = 'none';
+        };
+      });
+
+      /* ================= SUMMARY ================= */
+
+      const summary = $('#availabilitySummary');
+      const availabilityInputs = $$('input[name="availability[]"]');
+
+      function updateSummary() {
+        const map = {};
+
+        availabilityInputs.forEach(cb => {
+          if (cb.checked) {
+            const [day, time] = cb.value.split(' ', 2);
+            (map[day] ||= []).push(time);
+          }
+        });
+
+        summary.innerHTML = Object.keys(map).length
+          ? days.filter(d => map[d]).map(d => `
+              <div class="summary-line">
+                <span class="day-name">${d}:</span>
+                <span>${map[d].join(', ')}</span>
+              </div>
+            `).join('')
+          : '<div>No times selected yet.</div>';
+      }
+
+      availabilityInputs.forEach(cb =>
+        cb.addEventListener('change', updateSummary)
+      );
+
+      updateSummary();
+
+        /* ================= RECAPTCHA ================= */
+
+      function submitWithRecaptcha() {
+        if (submitting) return;
+
+        submitting = true;
+        nextBtn.disabled = true;
+
+        if (!window.grecaptcha) {
+          console.error('reCAPTCHA not loaded');
+          submitting = false;
+          nextBtn.disabled = false;
+          return;
+        }
+
+        grecaptcha.ready(() => {
+          grecaptcha
+            .execute('6LdVB1QsAAAAAPy1d_7Z-j8Iej3arnan-SpJ8GcT', { action: 'submit' })
+            .then(token => {
+              document.getElementById('recaptchaToken').value = token;
+              form.submit();
+            })
+            .catch(err => {
+              console.error('reCAPTCHA execution failed', err);
+              submitting = false;
+              nextBtn.disabled = false;
+            });
+        });
+      }
+
+      /* =============== LEAVE CONFIRMATION ================ */
+      let formSubmitted = false;
+      let formTouched = false;
+
+      // Mark form as submitted
+      form.addEventListener('submit', () => {
+        formSubmitted = true;
+      });
+
+      // Detect any user interaction with the form
+      form.addEventListener('input', () => {
+        formTouched = true;
+      });
+
+      form.addEventListener('change', () => {
+        formTouched = true;
+      });
+
+      // Warn before leaving page
+      window.addEventListener('beforeunload', e => {
+        if (!formSubmitted && formTouched) {
+          e.preventDefault();
+          e.returnValue = '';
+        }
+      });
+
+      // Push a dummy history state when form is touched
+      function enableBackWarning() {
+        if (!formTouched) return;
+        history.pushState({ form: 'dirty' }, '');
+      }
+
+      // Track interaction
+      form.addEventListener('input', enableBackWarning);
+      form.addEventListener('change', enableBackWarning);
+
+      // Intercept back navigation
+      window.addEventListener('popstate', e => {
+        if (!formSubmitted && formTouched) {
+          const leave = confirm(
+            'You have unsaved changes. Are you sure you want to leave this form?'
+          );
+
+          if (!leave) {
+            history.pushState({ form: 'dirty' }, '');
+          }
+        }
+      });
     </script>
   </body>
 </html>
