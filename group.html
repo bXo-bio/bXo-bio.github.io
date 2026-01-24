@@ -440,30 +440,76 @@
         });
       }
 
-      /* =============== LEAVE CONFIRMATION ================ */
-      let formSubmitted = false;
-      let formTouched = false;
+      /* =============== CUSTOM LEAVE MODAL ================ */
+      document.addEventListener('DOMContentLoaded', () => {
 
-      // Mark form as submitted
-      form.addEventListener('submit', () => {
-        formSubmitted = true;
-      });
+        let formTouched = false;
+        let formSubmitted = false;
+        let pendingNavigation = null;
 
-      // Detect any user interaction with the form
-      form.addEventListener('input', () => {
-        formTouched = true;
-      });
+        const modal = document.getElementById('leaveModal');
+        const stayBtn = document.getElementById('stayBtn');
+        const leaveBtn = document.getElementById('leaveBtn');
 
-      form.addEventListener('change', () => {
-        formTouched = true;
-      });
+        // Track dirty state
+        form.addEventListener('input', () => {
+          if (!formTouched) {
+            formTouched = true;
+            history.pushState({ dirty: true }, '');
+          }
+        });
 
-      // Warn before leaving page
-      window.addEventListener('beforeunload', e => {
-        if (!formSubmitted && formTouched) {
-          e.preventDefault();
-          e.returnValue = '';
+        form.addEventListener('change', () => {
+          if (!formTouched) {
+            formTouched = true;
+            history.pushState({ dirty: true }, '');
+          }
+        });
+
+        form.addEventListener('submit', () => {
+          formSubmitted = true;
+        });
+
+        function openModal(onLeave) {
+          pendingNavigation = onLeave;
+          modal.classList.add('active');
         }
+
+        function closeModal() {
+          modal.classList.remove('active');
+          pendingNavigation = null;
+        }
+
+        stayBtn.addEventListener('click', closeModal);
+
+        leaveBtn.addEventListener('click', () => {
+          modal.classList.remove('active');
+          if (pendingNavigation) pendingNavigation();
+        });
+
+        document.querySelectorAll('a[href]').forEach(link => {
+          link.addEventListener('click', e => {
+            if (!formTouched || formSubmitted) return;
+
+            e.preventDefault();
+
+            openModal(() => {
+              window.location.href = link.href;
+            });
+          });
+        });
+
+        window.addEventListener('popstate', () => {
+          if (!formTouched || formSubmitted) return;
+
+          openModal(() => {
+            formTouched = false;
+            history.back();
+          });
+
+          history.pushState({ dirty: true }, '');
+        });
+
       });
     </script>
   </body>
