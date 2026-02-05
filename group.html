@@ -13,7 +13,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LdVB1QsAAAAAPy1d_7Z-j8Iej3arnan-SpJ8GcT"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container form-scope">
       <header>
         <h1>Group Tutoring</h1>
         <p class="subtitle">Fill out this quick form to join a group tutoring session</p>
@@ -24,7 +24,7 @@
         </div>
         <div class="progress-text" id="progressText">Question 1 of 6</div>
       </div>
-      <form id="tutoringForm" action="https://formspree.io/f/xzdekpvv" method="POST">
+      <form id="tutoringForm" class="form" action="https://formspree.io/f/xzdekpvv" method="POST">
         <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
         <div class="card-wrapper">
           <div class="card active">
