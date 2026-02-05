@@ -22,7 +22,7 @@
         <div class="progress-bar">
           <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="progress-text" id="progressText">Step 1 of 6</div>
+        <div class="progress-text" id="progressText">Question 1 of 6</div>
       </div>
       <form id="tutoringForm" action="https://formspree.io/f/xzdekpvv" method="POST">
         <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
@@ -51,18 +51,37 @@
               required
             >
           </div>
-        </div>        
+        </div>    
         <div class="card-wrapper">
-          <div class="card">
-            <label>Grade</label>
-            <div class="grade-buttons">
-              <input type="radio" id="year11" name="grade" value="Year 11" required>
-              <label for="year11">Year 11</label>
-              <input type="radio" id="year12" name="grade" value="Year 12">
-              <label for="year12">Year 12</label>
+          <div class="card year-card">
+            <label>Student Year Level</label>
+        
+            <input type="hidden" name="grade" id="gradeValue" required>
+        
+            <div class="day-selector year-selector">
+              <div class="selected-day" id="selectedYear">
+                <span id="currentYear">Select year level</span>
+                <button type="button" id="toggleYears">&#9662;</button>
+              </div>
+        
+              <div class="day-list" id="yearList">
+                <div class="day-option" data-year="Kindergarten">Kindergarten</div>
+                <div class="day-option" data-year="Year 1">Year 1</div>
+                <div class="day-option" data-year="Year 2">Year 2</div>
+                <div class="day-option" data-year="Year 3">Year 3</div>
+                <div class="day-option" data-year="Year 4">Year 4</div>
+                <div class="day-option" data-year="Year 5">Year 5</div>
+                <div class="day-option" data-year="Year 6">Year 6</div>
+                <div class="day-option" data-year="Year 7">Year 7</div>
+                <div class="day-option" data-year="Year 8">Year 8</div>
+                <div class="day-option" data-year="Year 9">Year 9</div>
+                <div class="day-option" data-year="Year 10">Year 10</div>
+                <div class="day-option" data-year="Year 11">Year 11</div>
+                <div class="day-option" data-year="Year 12">Year 12</div>
+              </div>
             </div>
           </div>
-        </div>
+        </div>    
         <div class="card-wrapper">
           <div class="card">
             <label>How many students are in your group?</label>
@@ -193,7 +212,7 @@
     const percent = (index  / total) * 100;
 
       progressFill.style.width = `${percent}%`;
-      progressText.textContent = `Step ${Math.min(index + 1, total)} of ${total}`;
+      progressText.textContent = `Question ${Math.min(index + 1, total)} of ${total}`;
     }
 
     updateButtons();
@@ -248,6 +267,13 @@
           showError(card, 'Please select at least one time slot.');
         }
       }
+      
+      const hiddenRequired = card.querySelector('input[type="hidden"][required]');
+      if (hiddenRequired && !hiddenRequired.value) {
+        valid = false;
+        showError(card, 'Please select a year level.');
+      }
+
 
       if (!valid) {
         card.classList.add('invalid');
@@ -392,6 +418,71 @@
           dayList.style.display = 'none';
         };
       });
+
+      /* ================= YEAR SELECTOR ================= */
+
+      const currentYear = document.getElementById('currentYear');
+      const yearList = document.getElementById('yearList');
+      const gradeValue = document.getElementById('gradeValue');
+      const selectedYear = document.getElementById('selectedYear');
+      const toggleYears = document.getElementById('toggleYears');
+
+      /* move dropdown to body so it escapes stacking contexts */
+      document.body.appendChild(yearList);
+
+      yearList.style.position = 'fixed';
+      yearList.style.zIndex = '2147483647'; // max safe z-index
+      yearList.style.display = 'none';
+
+      function openYearDropdown() {
+        const rect = selectedYear.getBoundingClientRect();
+
+        yearList.style.left = rect.left + 'px';
+        yearList.style.top = rect.bottom + 'px';
+        yearList.style.width = rect.width + 'px';
+        yearList.style.display = 'block';
+      }
+
+      function closeYearDropdown() {
+        yearList.style.display = 'none';
+      }
+
+      selectedYear.onclick = e => {
+        e.stopPropagation();
+
+        if (yearList.style.display === 'block') {
+          closeYearDropdown();
+        } else {
+          openYearDropdown();
+        }
+      };
+
+      document.querySelectorAll('#yearList .day-option').forEach(opt => {
+        opt.tabIndex = 0;
+        opt.onclick = () => {
+          const year = opt.dataset.year;
+          currentYear.textContent = year;
+          gradeValue.value = year;
+          closeYearDropdown();
+        };
+      });
+
+      /* close on outside click */
+      document.addEventListener('click', e => {
+        if (!yearList.contains(e.target) && !selectedYear.contains(e.target)) {
+          closeYearDropdown();
+        }
+      });
+
+      /* reposition on scroll/resize */
+      window.addEventListener('scroll', () => {
+        if (yearList.style.display === 'block') openYearDropdown();
+      }, true);
+
+      window.addEventListener('resize', () => {
+        if (yearList.style.display === 'block') openYearDropdown();
+      });
+
 
       /* ================= SUMMARY ================= */
 
