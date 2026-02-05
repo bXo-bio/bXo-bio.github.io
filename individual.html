@@ -87,11 +87,11 @@
           <div class="card">
             <label>Subject</label>
             <div class="subject-buttons">
-              <input type="radio" id="math" name="subject" value="Mathematics" required>
+              <input type="checkbox" id="math" name="subject[]" value="Mathematics" required>
               <label for="math">Mathematics</label>
-        
-              <input type="radio" id="biology" name="subject" value="Biology">
-              <label for="biology">Biology</label>
+              
+              <input type="checkbox" id="biology" name="subject[]" value="Biology">
+              <label for="biology">Biology</label>              
             </div>
           </div>
         </div>
@@ -259,9 +259,16 @@
       });
 
       const radios = [...card.querySelectorAll('input[type="radio"]')];
+      const checkboxes = [...card.querySelectorAll('input[type="checkbox"]')];
+
       if (radios.length && !radios.some(r => r.checked)) {
         valid = false;
         showError(card, 'Please select an option.');
+      }
+
+      if (checkboxes.length && !checkboxes.some(c => c.checked)) {
+        valid = false;
+        showError(card, 'Please select at least one subject.');
       }
 
       if (card.classList.contains('availability-card')) {
